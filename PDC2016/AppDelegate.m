@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "PDCApiProvider.h"
+#import "TimeslotsDataSource.h"
 
 @interface AppDelegate ()
 

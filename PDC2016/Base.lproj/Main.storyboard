@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -29,7 +30,7 @@
         <!--Time Slots-->
         <scene sceneID="JXV-je-b08">
             <objects>
-                <viewController title="Time Slots" id="zyF-3N-dNi" sceneMemberID="viewController">
+                <viewController title="Time Slots" id="zyF-3N-dNi" customClass="TimeslotsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ugR-Sw-VXu"/>
                         <viewControllerLayoutGuide type="bottom" id="Pt5-ra-0vW"/>
@@ -37,9 +38,30 @@
                     <view key="view" contentMode="scaleToFill" id="u4P-C3-JzP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wCj-vr-kOl">
+                                <rect key="frame" x="0.0" y="72" width="600" height="479"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewLayout key="collectionViewLayout" id="Zgp-Uz-AZx"/>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zyF-3N-dNi" id="kv7-3W-eDj"/>
+                                    <outlet property="delegate" destination="zyF-3N-dNi" id="mnc-Ev-Bw9"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="wCj-vr-kOl" secondAttribute="trailing" constant="-20" id="Sif-7c-1Sy"/>
+                            <constraint firstItem="wCj-vr-kOl" firstAttribute="leading" secondItem="u4P-C3-JzP" secondAttribute="leadingMargin" constant="-20" id="eQj-u2-sgc"/>
+                            <constraint firstItem="wCj-vr-kOl" firstAttribute="top" secondItem="ugR-Sw-VXu" secondAttribute="bottom" constant="8" id="hDL-9h-fAB"/>
+                            <constraint firstItem="Pt5-ra-0vW" firstAttribute="top" secondItem="wCj-vr-kOl" secondAttribute="bottom" id="owY-xm-L0k"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Yvy-6g-YNC"/>
+                    <navigationItem key="navigationItem" title="Timeslots" id="Yvy-6g-YNC"/>
+                    <connections>
+                        <outlet property="timeslotsCollectionView" destination="wCj-vr-kOl" id="g7q-7y-0wk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43u-Ua-rpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

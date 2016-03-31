@@ -13,6 +13,12 @@
 		CB49DD401CAD77D00062F9D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB49DD3E1CAD77D00062F9D2 /* Main.storyboard */; };
 		CB49DD421CAD77D10062F9D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB49DD411CAD77D10062F9D2 /* Assets.xcassets */; };
 		CB49DD451CAD77D10062F9D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB49DD431CAD77D10062F9D2 /* LaunchScreen.storyboard */; };
+		CB49DD4E1CAD7E750062F9D2 /* TimeslotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD4D1CAD7E750062F9D2 /* TimeslotsViewController.m */; };
+		CB49DD521CAD7EFF0062F9D2 /* TimeslotsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD511CAD7EFF0062F9D2 /* TimeslotsDataSource.m */; };
+		CB49DD551CAD806D0062F9D2 /* PDCApiProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD541CAD806D0062F9D2 /* PDCApiProvider.m */; };
+		CB49DD581CAD80B40062F9D2 /* Timeslot.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD571CAD80B40062F9D2 /* Timeslot.m */; };
+		CB49DD5C1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD5A1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m */; };
+		CB49DD5D1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,17 @@
 		CB49DD411CAD77D10062F9D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB49DD441CAD77D10062F9D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB49DD461CAD77D10062F9D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB49DD4C1CAD7E750062F9D2 /* TimeslotsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeslotsViewController.h; sourceTree = "<group>"; };
+		CB49DD4D1CAD7E750062F9D2 /* TimeslotsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeslotsViewController.m; sourceTree = "<group>"; };
+		CB49DD501CAD7EFF0062F9D2 /* TimeslotsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeslotsDataSource.h; sourceTree = "<group>"; };
+		CB49DD511CAD7EFF0062F9D2 /* TimeslotsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeslotsDataSource.m; sourceTree = "<group>"; };
+		CB49DD531CAD806D0062F9D2 /* PDCApiProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDCApiProvider.h; sourceTree = "<group>"; };
+		CB49DD541CAD806D0062F9D2 /* PDCApiProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDCApiProvider.m; sourceTree = "<group>"; };
+		CB49DD561CAD80B40062F9D2 /* Timeslot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timeslot.h; sourceTree = "<group>"; };
+		CB49DD571CAD80B40062F9D2 /* Timeslot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timeslot.m; sourceTree = "<group>"; };
+		CB49DD591CAD94F40062F9D2 /* TimeSlotCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSlotCollectionViewCell.h; sourceTree = "<group>"; };
+		CB49DD5A1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSlotCollectionViewCell.m; sourceTree = "<group>"; };
+		CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeSlotCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +88,9 @@
 		CB49DD311CAD77D00062F9D2 /* PDC2016 */ = {
 			isa = PBXGroup;
 			children = (
+				CB49DD531CAD806D0062F9D2 /* PDCApiProvider.h */,
+				CB49DD541CAD806D0062F9D2 /* PDCApiProvider.m */,
+				CB49DD4F1CAD7E830062F9D2 /* Timeslots */,
 				CB49DD351CAD77D00062F9D2 /* AppDelegate.h */,
 				CB49DD361CAD77D00062F9D2 /* AppDelegate.m */,
 				CB49DD3E1CAD77D00062F9D2 /* Main.storyboard */,
@@ -88,6 +108,22 @@
 				CB49DD331CAD77D00062F9D2 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB49DD4F1CAD7E830062F9D2 /* Timeslots */ = {
+			isa = PBXGroup;
+			children = (
+				CB49DD4C1CAD7E750062F9D2 /* TimeslotsViewController.h */,
+				CB49DD4D1CAD7E750062F9D2 /* TimeslotsViewController.m */,
+				CB49DD501CAD7EFF0062F9D2 /* TimeslotsDataSource.h */,
+				CB49DD511CAD7EFF0062F9D2 /* TimeslotsDataSource.m */,
+				CB49DD561CAD80B40062F9D2 /* Timeslot.h */,
+				CB49DD571CAD80B40062F9D2 /* Timeslot.m */,
+				CB49DD591CAD94F40062F9D2 /* TimeSlotCollectionViewCell.h */,
+				CB49DD5A1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m */,
+				CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */,
+			);
+			name = Timeslots;
 			sourceTree = "<group>";
 		};
 		CE95445BB2646B714CBA9AEB /* Frameworks */ = {
@@ -160,6 +196,7 @@
 				CB49DD451CAD77D10062F9D2 /* LaunchScreen.storyboard in Resources */,
 				CB49DD421CAD77D10062F9D2 /* Assets.xcassets in Resources */,
 				CB49DD401CAD77D00062F9D2 /* Main.storyboard in Resources */,
+				CB49DD5D1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,8 +240,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB49DD551CAD806D0062F9D2 /* PDCApiProvider.m in Sources */,
+				CB49DD5C1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m in Sources */,
+				CB49DD4E1CAD7E750062F9D2 /* TimeslotsViewController.m in Sources */,
+				CB49DD581CAD80B40062F9D2 /* Timeslot.m in Sources */,
 				CB49DD371CAD77D00062F9D2 /* AppDelegate.m in Sources */,
 				CB49DD341CAD77D00062F9D2 /* main.m in Sources */,
+				CB49DD521CAD7EFF0062F9D2 /* TimeslotsDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
