@@ -20,6 +20,7 @@
 		CB49DD5C1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD5A1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m */; };
 		CB49DD5D1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */; };
 		CB49DD601CADA38D0062F9D2 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD5F1CADA38D0062F9D2 /* Room.m */; };
+		CB49DD631CADA6150062F9D2 /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD621CADA6150062F9D2 /* Speaker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeSlotCollectionViewCell.xib; sourceTree = "<group>"; };
 		CB49DD5E1CADA38D0062F9D2 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
 		CB49DD5F1CADA38D0062F9D2 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
+		CB49DD611CADA6150062F9D2 /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
+		CB49DD621CADA6150062F9D2 /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,8 @@
 				CB49DD431CAD77D10062F9D2 /* LaunchScreen.storyboard */,
 				CB49DD461CAD77D10062F9D2 /* Info.plist */,
 				CB49DD321CAD77D00062F9D2 /* Supporting Files */,
+				CB49DD611CADA6150062F9D2 /* Speaker.h */,
+				CB49DD621CADA6150062F9D2 /* Speaker.m */,
 			);
 			path = PDC2016;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				CB49DD341CAD77D00062F9D2 /* main.m in Sources */,
 				CB49DD601CADA38D0062F9D2 /* Room.m in Sources */,
 				CB49DD521CAD7EFF0062F9D2 /* TimeslotsDataSource.m in Sources */,
+				CB49DD631CADA6150062F9D2 /* Speaker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

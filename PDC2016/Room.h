@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <Restkit/Restkit.h>
 @interface Room : NSObject
 
 @property(strong,nonatomic) NSNumber *identifier;
 @property(strong,nonatomic) NSString *name;
 
++(RKObjectMapping *)roomMapping;
 @end

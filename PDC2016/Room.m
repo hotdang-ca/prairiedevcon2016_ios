@@ -10,4 +10,14 @@
 
 @implementation Room
 
++(RKObjectMapping *)roomMapping {
+    RKObjectMapping *roomMapping = [RKObjectMapping mappingForClass:[self class]];
+    [roomMapping addAttributeMappingsFromDictionary:@{
+                                                      @"id": @"identifier",
+                                                      @"name": @"name"
+                                                      }];
+    return roomMapping;
+}
+
+
 @end
