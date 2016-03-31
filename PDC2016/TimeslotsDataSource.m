@@ -10,6 +10,7 @@
 #import "Timeslot.h"
 #import <Restkit/RestKit.h>
 #import "PDCApiProvider.h"
+#import "Room.h"
 
 #define kTimeslotsDataSourceObjectKeyPath @"timeslots"
 
@@ -37,12 +38,21 @@
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
     RKObjectManager *objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
     
+    
+    RKObjectMapping *roomMapping = [RKObjectMapping mappingForClass:[Room class]];
+    [roomMapping addAttributeMappingsFromDictionary:@{
+                                                      @"id": @"identifier",
+                                                      @"name": @"name"
+                                                      }];
+    
     RKObjectMapping *timeslotsMapping = [RKObjectMapping mappingForClass:[Timeslot class]];
+    
     [timeslotsMapping addAttributeMappingsFromDictionary:@{
                                                            @"id": @"identifier",
                                                            @"day": @"day",
                                                            @"timerange": @"timeRange"
                                                            }];
+    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"room" toKeyPath:@"room" withMapping:roomMapping]];
     
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:timeslotsMapping
                                                  method:RKRequestMethodGET

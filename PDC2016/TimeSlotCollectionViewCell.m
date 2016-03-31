@@ -8,10 +8,12 @@
 
 #import "TimeSlotCollectionViewCell.h"
 #import "Timeslot.h"
+#import "Room.h"
 
 @interface TimeSlotCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeRangeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *roomLabel;
 @end
 
 @implementation TimeSlotCollectionViewCell
@@ -29,5 +31,6 @@
 -(void)configureWithTimeSlot:(Timeslot *)timeslot {
     self.dayLabel.text = timeslot.day;
     self.timeRangeLabel.text = timeslot.timeRange;
+    self.roomLabel.text = timeslot.room.name;
 }
 @end

@@ -28,10 +28,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcO-QE-6rN">
+                                <rect key="frame" x="20" y="109" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="LcO-QE-6rN" firstAttribute="leading" secondItem="RCU-Mg-QpS" secondAttribute="leading" id="5F0-N7-fcf"/>
                             <constraint firstItem="tYa-IJ-sBI" firstAttribute="leading" secondItem="RCU-Mg-QpS" secondAttribute="trailing" constant="23" id="Qsy-Jv-0fs"/>
+                            <constraint firstItem="LcO-QE-6rN" firstAttribute="top" secondItem="RCU-Mg-QpS" secondAttribute="bottom" constant="8" id="Vqv-lF-ETI"/>
                             <constraint firstItem="RCU-Mg-QpS" firstAttribute="leading" secondItem="Nin-pp-gMc" secondAttribute="leading" constant="20" id="Zol-ZU-g0m"/>
                             <constraint firstItem="RCU-Mg-QpS" firstAttribute="centerY" secondItem="Nin-pp-gMc" secondAttribute="centerY" id="ahG-9a-6a0"/>
                             <constraint firstItem="tYa-IJ-sBI" firstAttribute="centerY" secondItem="RCU-Mg-QpS" secondAttribute="centerY" id="okg-xF-1iM"/>
@@ -49,6 +57,7 @@
             <size key="customSize" width="652" height="180"/>
             <connections>
                 <outlet property="dayLabel" destination="RCU-Mg-QpS" id="AkU-H1-JTf"/>
+                <outlet property="roomLabel" destination="LcO-QE-6rN" id="AsM-XS-19S"/>
                 <outlet property="timeRangeLabel" destination="tYa-IJ-sBI" id="Fzu-hP-aab"/>
             </connections>
             <point key="canvasLocation" x="367" y="347"/>
