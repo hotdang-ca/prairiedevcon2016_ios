@@ -28,7 +28,16 @@
     [self setupCollectionViewCell];
     
     [_dataSource reloadTimeslots];
+    
+    if (self.navigationController) {
+        UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadList:)];
+        self.navigationItem.rightBarButtonItem = refreshButton;
+    }
     // Do any additional setup after loading the view.
+}
+
+- (void)reloadList:(id)sender {
+    [_dataSource reloadTimeslots];
 }
 
 - (void)didReceiveMemoryWarning {
