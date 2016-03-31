@@ -12,6 +12,7 @@
 #import "PDCApiProvider.h"
 #import "Room.h"
 #import "Speaker.h"
+#import "Session.h"
 
 #define kTimeslotsDataSourceObjectKeyPath @"timeslots"
 
@@ -48,8 +49,9 @@
                                                            @"day": @"day",
                                                            @"timerange": @"timeRange"
                                                            }];
-    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"room" toKeyPath:@"room" withMapping:[Room roomMapping]]];
-    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"speaker" toKeyPath:@"speaker" withMapping:[Speaker speakerMapping]]];
+    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"room" toKeyPath:@"room" withMapping:[Room defaultMapping]]];
+    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"speaker" toKeyPath:@"speaker" withMapping:[Speaker defaultMapping]]];
+    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"session" toKeyPath:@"session" withMapping:[Session defaultMapping]]];
     
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:timeslotsMapping
                                                  method:RKRequestMethodGET

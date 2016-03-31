@@ -9,7 +9,7 @@
 #import "Speaker.h"
 @implementation Speaker
 
-+(RKObjectMapping *)speakerMapping {
++(RKObjectMapping *)defaultMapping {
     RKObjectMapping *speakerMapping = [RKObjectMapping mappingForClass:[self class]];
     [speakerMapping addAttributeMappingsFromDictionary:@{
                                                       @"id": @"identifier",

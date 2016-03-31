@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class Room;
 @class Speaker;
+@class Session;
 
 @interface Timeslot : NSObject
 @property (strong, nonatomic) NSNumber *identifier;
@@ -16,7 +17,6 @@
 @property (strong, nonatomic) NSString *timeRange;
 @property (strong, nonatomic) Room *room;
 @property (strong, nonatomic) Speaker *speaker;
-
-// has one session
+@property (strong, nonatomic) Session *session;
 
 @end

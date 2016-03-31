@@ -21,5 +21,5 @@
 @property (strong, nonatomic) NSString *webUrlString;
 @property (strong, nonatomic) NSString *twitterName;
 
-+(RKObjectMapping *)speakerMapping;
++(RKObjectMapping *)defaultMapping;
 @end
