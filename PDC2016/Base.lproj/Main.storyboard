@@ -70,7 +70,7 @@
         <!--Sessions-->
         <scene sceneID="u98-3i-EJV">
             <objects>
-                <viewController title="Sessions" id="1Zt-Hx-qD0" sceneMemberID="viewController">
+                <viewController title="Sessions" id="1Zt-Hx-qD0" customClass="SessionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dnn-Ic-szN"/>
                         <viewControllerLayoutGuide type="bottom" id="TNQ-fI-es3"/>

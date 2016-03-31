@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Restkit/Restkit.h>
+
 @class Room;
 @class Speaker;
 @class Session;
@@ -19,4 +21,5 @@
 @property (strong, nonatomic) Speaker *speaker;
 @property (strong, nonatomic) Session *session;
 
++(RKObjectMapping *)defaultMapping;
 @end

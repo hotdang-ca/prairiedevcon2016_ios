@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "PDCApiProvider.h"
-#import "TimeslotsDataSource.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[PDCApiProvider sharedApiProvider] configureForRestkit];
     return YES;
 }
 
