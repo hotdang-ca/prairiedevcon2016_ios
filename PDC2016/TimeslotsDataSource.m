@@ -14,8 +14,6 @@
 #import "Speaker.h"
 #import "Session.h"
 
-#define kTimeslotsDataSourceObjectKeyPath @"timeslots"
-
 @implementation TimeslotsDataSource
 +(instancetype)sharedDataSource {
     static TimeslotsDataSource *datasource = nil;
@@ -30,41 +28,12 @@
 -(instancetype)init {
     if (self = [super init]) {
         _timeslots = @[];
-        [self configureForRestkit];
     }
     return self;
 }
 
--(void)configureForRestkit {
-    NSURL *baseURL = [[PDCApiProvider sharedApiProvider] baseUrl];
-    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
-    RKObjectManager *objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
-    
-    
-        
-    RKObjectMapping *timeslotsMapping = [RKObjectMapping mappingForClass:[Timeslot class]];
-    
-    [timeslotsMapping addAttributeMappingsFromDictionary:@{
-                                                           @"id": @"identifier",
-                                                           @"day": @"day",
-                                                           @"timerange": @"timeRange"
-                                                           }];
-    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"room" toKeyPath:@"room" withMapping:[Room defaultMapping]]];
-    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"speaker" toKeyPath:@"speaker" withMapping:[Speaker defaultMapping]]];
-    [timeslotsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"session" toKeyPath:@"session" withMapping:[Session defaultMapping]]];
-    
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:timeslotsMapping
-                                                 method:RKRequestMethodGET
-                                            pathPattern:kApiProviderTimeslotsListURLString
-                                                keyPath:kTimeslotsDataSourceObjectKeyPath
-                                            statusCodes:[NSIndexSet indexSetWithIndex:200]];
-    [objectManager addResponseDescriptor:responseDescriptor];
-    
-    
-}
-
 -(void)reloadTimeslots {
-    [[RKObjectManager sharedManager] getObjectsAtPath:@"/api/timeslots" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [[RKObjectManager sharedManager] getObjectsAtPath:kApiProviderTimeslotsListURLString parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         [self willChangeValueForKey:@"timeslots"];
         _timeslots = mappingResult.array;
         [self didChangeValueForKey:@"timeslots"];

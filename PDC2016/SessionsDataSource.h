@@ -1,5 +1,5 @@
 //
-//  TimeslotsDataSource.h
+//  SessionsDataSource.h
 //  PDC2016
 //
 //  Created by James Perih on 2016-03-31.
@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#define kSessionsDataSourceObjectKeyPath @"sessions"
 
-#define kTimeslotsDataSourceObjectKeyPath @"timeslots"
-
-@interface TimeslotsDataSource : NSObject
+@interface SessionsDataSource : NSObject
 +(instancetype)sharedDataSource;
 
--(void)reloadTimeslots;
+-(void)reloadSessions;
 
-@property (strong, nonatomic) NSArray *timeslots;
+@property (strong, nonatomic) NSArray *sessions;
 @end

@@ -10,4 +10,15 @@
 
 @implementation Timeslot
 
++(RKObjectMapping *)defaultMapping {
+    RKObjectMapping *timeslotsMapping = [RKObjectMapping mappingForClass:[Timeslot class]];
+    
+    [timeslotsMapping addAttributeMappingsFromDictionary:@{
+                                                           @"id": @"identifier",
+                                                           @"day": @"day",
+                                                           @"timerange": @"timeRange"
+                                                           }];
+    return timeslotsMapping;
+}
+
 @end

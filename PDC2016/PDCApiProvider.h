@@ -10,11 +10,12 @@
 
 #define kApiProviderBaseURLString @"http://192.168.100.112:8000"
 #define kApiProviderTimeslotsListURLString @"/api/timeslots"
-#define kApiProviderTimeslotsItemURLString @"/api/timeslots/%@"
+#define kApiProviderSessionListURLString @"/api/sessions"
 
 @interface PDCApiProvider : NSObject
 +(instancetype)sharedApiProvider;
+
+-(void)configureForRestkit;
 -(NSURL *)baseUrl;
--(NSURL *)timeslotsUrl;
--(NSURL *)timeslotUrlForIdentifier:(NSNumber *)identifier;
+
 @end
