@@ -51,6 +51,8 @@
     
     RKObjectMapping *sessionMapping = [Session defaultMapping];
     [sessionMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"speaker" toKeyPath:@"speaker" withMapping:[Speaker defaultMapping]]];
+    [sessionMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"room" toKeyPath:@"room" withMapping:[Room defaultMapping]]];
+    [sessionMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"timeslot" toKeyPath:@"timeslot" withMapping:[Timeslot defaultMapping]]];
     
     RKResponseDescriptor *sessionResponseDescriptor =
     [RKResponseDescriptor responseDescriptorWithMapping:sessionMapping

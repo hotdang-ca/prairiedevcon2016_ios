@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4C8B219CB4DA1F43C4C9F17D /* libPods-PDC2016.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9009762EE18C5D1268036AE /* libPods-PDC2016.a */; };
 		CB025CAA1CADC28B007BF6A9 /* SessionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB025CA91CADC28B007BF6A9 /* SessionsViewController.m */; };
+		CB025CB01CAE02DE007BF6A9 /* SessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB025CAE1CAE02DE007BF6A9 /* SessionCollectionViewCell.m */; };
+		CB025CB11CAE02DE007BF6A9 /* SessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB025CAF1CAE02DE007BF6A9 /* SessionCollectionViewCell.xib */; };
 		CB49DD341CAD77D00062F9D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD331CAD77D00062F9D2 /* main.m */; };
 		CB49DD371CAD77D00062F9D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD361CAD77D00062F9D2 /* AppDelegate.m */; };
 		CB49DD401CAD77D00062F9D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB49DD3E1CAD77D00062F9D2 /* Main.storyboard */; };
@@ -32,6 +34,9 @@
 		B9009762EE18C5D1268036AE /* libPods-PDC2016.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PDC2016.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB025CA81CADC28B007BF6A9 /* SessionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionsViewController.h; sourceTree = "<group>"; };
 		CB025CA91CADC28B007BF6A9 /* SessionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionsViewController.m; sourceTree = "<group>"; };
+		CB025CAD1CAE02DE007BF6A9 /* SessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCollectionViewCell.h; sourceTree = "<group>"; };
+		CB025CAE1CAE02DE007BF6A9 /* SessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCollectionViewCell.m; sourceTree = "<group>"; };
+		CB025CAF1CAE02DE007BF6A9 /* SessionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCollectionViewCell.xib; sourceTree = "<group>"; };
 		CB49DD2F1CAD77D00062F9D2 /* PDC2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDC2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB49DD331CAD77D00062F9D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB49DD351CAD77D00062F9D2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -82,6 +87,63 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CB025CAB1CADFCB2007BF6A9 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				CB49DD531CAD806D0062F9D2 /* PDCApiProvider.h */,
+				CB49DD541CAD806D0062F9D2 /* PDCApiProvider.m */,
+				CB49DD501CAD7EFF0062F9D2 /* TimeslotsDataSource.h */,
+				CB49DD511CAD7EFF0062F9D2 /* TimeslotsDataSource.m */,
+				CB49DD671CADBFE70062F9D2 /* SessionsDataSource.h */,
+				CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */,
+			);
+			name = DataSources;
+			sourceTree = "<group>";
+		};
+		CB025CAC1CADFCC0007BF6A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CB49DD611CADA6150062F9D2 /* Speaker.h */,
+				CB49DD621CADA6150062F9D2 /* Speaker.m */,
+				CB49DD641CADA92E0062F9D2 /* Session.h */,
+				CB49DD651CADA92E0062F9D2 /* Session.m */,
+				CB49DD561CAD80B40062F9D2 /* Timeslot.h */,
+				CB49DD571CAD80B40062F9D2 /* Timeslot.m */,
+				CB49DD5E1CADA38D0062F9D2 /* Room.h */,
+				CB49DD5F1CADA38D0062F9D2 /* Room.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		CB025CB21CAE065B007BF6A9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CB025CAD1CAE02DE007BF6A9 /* SessionCollectionViewCell.h */,
+				CB025CAE1CAE02DE007BF6A9 /* SessionCollectionViewCell.m */,
+				CB49DD591CAD94F40062F9D2 /* TimeSlotCollectionViewCell.h */,
+				CB49DD5A1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		CB025CB31CAE066D007BF6A9 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */,
+				CB025CAF1CAE02DE007BF6A9 /* SessionCollectionViewCell.xib */,
+			);
+			name = Nibs;
+			sourceTree = "<group>";
+		};
+		CB025CB41CAE0677007BF6A9 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CB49DD3E1CAD77D00062F9D2 /* Main.storyboard */,
+				CB49DD431CAD77D10062F9D2 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		CB49DD261CAD77D00062F9D2 = {
 			isa = PBXGroup;
 			children = (
@@ -103,28 +165,14 @@
 		CB49DD311CAD77D00062F9D2 /* PDC2016 */ = {
 			isa = PBXGroup;
 			children = (
-				CB49DD531CAD806D0062F9D2 /* PDCApiProvider.h */,
-				CB49DD541CAD806D0062F9D2 /* PDCApiProvider.m */,
-				CB49DD4F1CAD7E830062F9D2 /* Timeslots */,
+				CB025CAC1CADFCC0007BF6A9 /* Models */,
+				CB025CAB1CADFCB2007BF6A9 /* DataSources */,
+				CB49DD4F1CAD7E830062F9D2 /* ViewControllers */,
 				CB49DD351CAD77D00062F9D2 /* AppDelegate.h */,
 				CB49DD361CAD77D00062F9D2 /* AppDelegate.m */,
-				CB49DD3E1CAD77D00062F9D2 /* Main.storyboard */,
 				CB49DD411CAD77D10062F9D2 /* Assets.xcassets */,
-				CB49DD431CAD77D10062F9D2 /* LaunchScreen.storyboard */,
 				CB49DD461CAD77D10062F9D2 /* Info.plist */,
 				CB49DD321CAD77D00062F9D2 /* Supporting Files */,
-				CB49DD611CADA6150062F9D2 /* Speaker.h */,
-				CB49DD621CADA6150062F9D2 /* Speaker.m */,
-				CB49DD641CADA92E0062F9D2 /* Session.h */,
-				CB49DD651CADA92E0062F9D2 /* Session.m */,
-				CB49DD561CAD80B40062F9D2 /* Timeslot.h */,
-				CB49DD571CAD80B40062F9D2 /* Timeslot.m */,
-				CB49DD5E1CADA38D0062F9D2 /* Room.h */,
-				CB49DD5F1CADA38D0062F9D2 /* Room.m */,
-				CB025CA81CADC28B007BF6A9 /* SessionsViewController.h */,
-				CB025CA91CADC28B007BF6A9 /* SessionsViewController.m */,
-				CB49DD671CADBFE70062F9D2 /* SessionsDataSource.h */,
-				CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */,
 			);
 			path = PDC2016;
 			sourceTree = "<group>";
@@ -137,18 +185,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CB49DD4F1CAD7E830062F9D2 /* Timeslots */ = {
+		CB49DD4F1CAD7E830062F9D2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CB025CB41CAE0677007BF6A9 /* Storyboards */,
+				CB025CB31CAE066D007BF6A9 /* Nibs */,
+				CB025CB21CAE065B007BF6A9 /* Cells */,
 				CB49DD4C1CAD7E750062F9D2 /* TimeslotsViewController.h */,
 				CB49DD4D1CAD7E750062F9D2 /* TimeslotsViewController.m */,
-				CB49DD501CAD7EFF0062F9D2 /* TimeslotsDataSource.h */,
-				CB49DD511CAD7EFF0062F9D2 /* TimeslotsDataSource.m */,
-				CB49DD591CAD94F40062F9D2 /* TimeSlotCollectionViewCell.h */,
-				CB49DD5A1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m */,
-				CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */,
+				CB025CA81CADC28B007BF6A9 /* SessionsViewController.h */,
+				CB025CA91CADC28B007BF6A9 /* SessionsViewController.m */,
 			);
-			name = Timeslots;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		CE95445BB2646B714CBA9AEB /* Frameworks */ = {
@@ -221,6 +269,7 @@
 				CB49DD451CAD77D10062F9D2 /* LaunchScreen.storyboard in Resources */,
 				CB49DD421CAD77D10062F9D2 /* Assets.xcassets in Resources */,
 				CB49DD401CAD77D00062F9D2 /* Main.storyboard in Resources */,
+				CB025CB11CAE02DE007BF6A9 /* SessionCollectionViewCell.xib in Resources */,
 				CB49DD5D1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +325,7 @@
 				CB49DD601CADA38D0062F9D2 /* Room.m in Sources */,
 				CB025CAA1CADC28B007BF6A9 /* SessionsViewController.m in Sources */,
 				CB49DD521CAD7EFF0062F9D2 /* TimeslotsDataSource.m in Sources */,
+				CB025CB01CAE02DE007BF6A9 /* SessionCollectionViewCell.m in Sources */,
 				CB49DD631CADA6150062F9D2 /* Speaker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

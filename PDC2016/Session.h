@@ -8,14 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import <Restkit/Restkit.h>
-#import "Speaker.h"
+@class Speaker;
+@class Room;
+@class Timeslot;
 
 @interface Session : NSObject
 @property (strong, nonatomic) NSNumber *identifier;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *keywordString;
 @property (strong, nonatomic) NSString *sessionDescription;
+
 @property (strong, nonatomic) Speaker *speaker;
+@property (strong, nonatomic) Room *room;
+@property (strong, nonatomic) Timeslot *timeslot;
 
 +(RKObjectMapping *)defaultMapping;
 -(NSArray *)keywords;

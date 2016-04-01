@@ -78,9 +78,30 @@
                     <view key="view" contentMode="scaleToFill" id="Dyq-WV-a8S">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dPn-KV-4yT">
+                                <rect key="frame" x="0.0" y="72" width="600" height="471"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewLayout key="collectionViewLayout" id="Q6z-GX-vye"/>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="1Zt-Hx-qD0" id="pMi-te-2hz"/>
+                                    <outlet property="delegate" destination="1Zt-Hx-qD0" id="HRk-z0-gWM"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dPn-KV-4yT" firstAttribute="leading" secondItem="Dyq-WV-a8S" secondAttribute="leadingMargin" constant="-20" id="G9v-9p-ZIc"/>
+                            <constraint firstItem="dPn-KV-4yT" firstAttribute="top" secondItem="Dnn-Ic-szN" secondAttribute="bottom" constant="8" id="X2h-40-YYa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dPn-KV-4yT" secondAttribute="trailing" constant="-20" id="b2H-7M-pcF"/>
+                            <constraint firstItem="TNQ-fI-es3" firstAttribute="top" secondItem="dPn-KV-4yT" secondAttribute="bottom" constant="8" id="dap-Ix-qL9"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cGC-u2-2j5"/>
+                    <navigationItem key="navigationItem" title="Sessions" id="cGC-u2-2j5"/>
+                    <connections>
+                        <outlet property="sessionsCollectionView" destination="dPn-KV-4yT" id="lJn-ZC-qsD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TAb-dj-uG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
