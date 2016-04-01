@@ -8,18 +8,29 @@
 
 #import "SessionsViewController.h"
 #import "SessionsDataSource.h"
+#import "SessionCollectionViewCell.h"
+
+#import "Session.h"
+#import "Room.h"
+#import "Timeslot.h"
+#import "Speaker.h"
 
 @interface SessionsViewController ()
 @property (strong, nonatomic) SessionsDataSource *dataSource;
+@property (weak, nonatomic) IBOutlet UICollectionView *sessionsCollectionView;
 @end
 
-@implementation SessionsViewController
+@implementation SessionsViewController {
+    UICollectionViewFlowLayout *collectionViewLayout;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _dataSource = [SessionsDataSource sharedDataSource];
     [_dataSource addObserver:self forKeyPath:@"sessions" options:0 context:NULL];
+    
+    [self setupCollectionViewCell];
     [_dataSource reloadSessions];
     
     if (self.navigationController) {
@@ -44,7 +55,41 @@
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    NSLog(@"Items: %@", _dataSource.sessions);
+    [_sessionsCollectionView reloadData];
+}
+
+#pragma mark - Collection View Data Source
+-(void)setupCollectionViewCell {
+    collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    [collectionViewLayout setItemSize:CGSizeMake(self.view.frame.size.width-4, 200)];
+    [collectionViewLayout setSectionInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [collectionViewLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    collectionViewLayout.minimumLineSpacing = 8;
+    collectionViewLayout.minimumInteritemSpacing = 8;
+    [self.sessionsCollectionView setCollectionViewLayout:collectionViewLayout];
+    
+    UINib *nib = [UINib nibWithNibName:@"SessionCollectionViewCell"
+                                bundle:[NSBundle mainBundle]];
+    [self.sessionsCollectionView registerNib:nib forCellWithReuseIdentifier:kSessionReuseIdentifier];
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _dataSource.sessions.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    SessionCollectionViewCell *sessionCell = [self.sessionsCollectionView dequeueReusableCellWithReuseIdentifier:kSessionReuseIdentifier forIndexPath:indexPath];
+    Session *session = [_dataSource.sessions objectAtIndex:indexPath.row];
+    
+    if (sessionCell && session) {
+        [sessionCell configureWithSession:session];
+    }
+    
+    return sessionCell;
 }
 
 
