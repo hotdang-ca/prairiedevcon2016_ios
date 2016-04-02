@@ -55,6 +55,57 @@
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
+    
+    NSArray *uniqueTimeDateSlots = [_dataSource.sessions valueForKeyPath:@"@distinctUnionOfObjects.timeslot.timeRange"];
+
+    NSMutableArray *mondayEvents = [NSMutableArray array];
+    NSMutableArray *tuesdayEvents = [NSMutableArray array];
+    
+    for (Session *session in _dataSource.sessions) {
+        if ([session.timeslot.day isEqualToString:@"Monday"]) {
+            [mondayEvents addObject:session];
+        } else if ([session.timeslot.day isEqualToString:@"Tuesday"]) {
+            [tuesdayEvents addObject:session];
+        }
+    }
+    
+    NSArray *mondayTimeSlots = [mondayEvents valueForKeyPath:@"@distinctUnionOfObjects.timeslot.timeRange"];
+    NSArray *tuesdayTimeSlots = [tuesdayEvents valueForKeyPath:@"@distinctUnionOfObjects.timeslot.timeRange"];
+    
+    NSMutableArray *mondayByTimeSlot = [NSMutableArray arrayWithCapacity:mondayTimeSlots.count];
+    NSMutableArray *tuesdayByTimeSlot = [NSMutableArray arrayWithCapacity:tuesdayTimeSlots.count];
+    
+    for (int i = 0; i < mondayTimeSlots.count; i++) {
+        [mondayByTimeSlot addObject:[NSMutableArray array]];
+    }
+    for (int i = 0; i < tuesdayTimeSlots.count; i++) {
+        [tuesdayByTimeSlot addObject:[NSMutableArray array]];
+    }
+    
+    for (Session *session in mondayEvents) {
+        NSInteger indexOfThisSessionTimeslot = [mondayTimeSlots indexOfObject:session.timeslot.timeRange];
+        
+        if (indexOfThisSessionTimeslot != NSNotFound) {
+            [mondayByTimeSlot[indexOfThisSessionTimeslot] addObject:session];
+        }
+    }
+    
+    for (Session *session in tuesdayEvents) {
+        NSInteger indexOfThisSessionTimeSlot = [tuesdayTimeSlots indexOfObject:session.timeslot.timeRange];
+        
+        if (indexOfThisSessionTimeSlot != NSNotFound) {
+            [tuesdayByTimeSlot[indexOfThisSessionTimeSlot] addObject:session];
+        }
+    }
+    
+    NSLog(@"%@ %@", mondayByTimeSlot, tuesdayByTimeSlot);
+    
+    // now i have two arrays, monday and tuesday.
+    NSArray *allEvents = @[mondayByTimeSlot, tuesdayByTimeSlot];
+    
+    NSLog(@"All events: %@", allEvents);
+    
+    
     [_sessionsCollectionView reloadData];
 }
 
