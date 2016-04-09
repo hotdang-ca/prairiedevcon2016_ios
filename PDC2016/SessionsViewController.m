@@ -25,7 +25,6 @@
 
 @implementation SessionsViewController {
     UICollectionViewFlowLayout *collectionViewLayout;
-    NSArray *modifiedDataSource;
 }
 
 - (void)viewDidLoad {
@@ -33,9 +32,6 @@
     
     _dataSource = [SessionsDataSource sharedDataSource];
     [_dataSource addObserver:self forKeyPath:@"sessions" options:0 context:NULL];
-    
-    modifiedDataSource = [[NSArray alloc] init];
-    
     [self setupCollectionViewCell];
     [_dataSource reloadSessions];
     
@@ -62,105 +58,6 @@
                         change:(NSDictionary *)change
                        context:(void *)context {
     
-    NSArray *uniqueTimeDateSlots = [_dataSource.sessions valueForKeyPath:@"@distinctUnionOfObjects.timeslot.timeRange"];
-
-    
-    NSMutableArray *mondayEvents = [NSMutableArray array];
-    NSMutableArray *tuesdayEvents = [NSMutableArray array];
-    
-    for (Session *session in _dataSource.sessions) {
-        if ([session.timeslot.day isEqualToString:@"Monday"]) {
-            [mondayEvents addObject:session];
-        } else if ([session.timeslot.day isEqualToString:@"Tuesday"]) {
-            [tuesdayEvents addObject:session];
-        }
-    }
-    
-    NSArray *mondayTimeSlots = [mondayEvents valueForKeyPath:@"@distinctUnionOfObjects.timeslot.timeRange"];
-    NSArray *tuesdayTimeSlots = [tuesdayEvents valueForKeyPath:@"@distinctUnionOfObjects.timeslot.timeRange"];
-    
-    NSMutableArray *mondayByTimeSlot = [NSMutableArray arrayWithCapacity:mondayTimeSlots.count];
-    NSMutableArray *tuesdayByTimeSlot = [NSMutableArray arrayWithCapacity:tuesdayTimeSlots.count];
-    
-    for (int i = 0; i < mondayTimeSlots.count; i++) {
-        [mondayByTimeSlot addObject:[NSMutableArray array]];
-    }
-    for (int i = 0; i < tuesdayTimeSlots.count; i++) {
-        [tuesdayByTimeSlot addObject:[NSMutableArray array]];
-    }
-    
-    for (Session *session in mondayEvents) {
-        NSInteger indexOfThisSessionTimeslot = [mondayTimeSlots indexOfObject:session.timeslot.timeRange];
-        
-        if (indexOfThisSessionTimeslot != NSNotFound) {
-            [mondayByTimeSlot[indexOfThisSessionTimeslot] addObject:session];
-        }
-    }
-    
-    for (Session *session in tuesdayEvents) {
-        NSInteger indexOfThisSessionTimeSlot = [tuesdayTimeSlots indexOfObject:session.timeslot.timeRange];
-        
-        if (indexOfThisSessionTimeSlot != NSNotFound) {
-            [tuesdayByTimeSlot[indexOfThisSessionTimeSlot] addObject:session];
-        }
-    }
-    
-    NSArray *sortedMondayArray = [mondayByTimeSlot sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        NSArray *mondayTimeOrdering = @[
-                                        @"7:30 - 8:30",
-                                        @"8:30 - 9:30",
-                                        @"9:45 - 10:45",
-                                        @"11:00 - 12:00",
-                                        @"12:00 - 1:00",
-                                        @"1:00 - 2:00",
-                                        @"2:00 - 2:15",
-                                        @"2:15 - 3:15",
-                                        @"3:30 - 4:30",
-                                        ];
-        NSArray *aArray = (NSArray *)obj1;
-        NSArray *bArray = (NSArray *)obj2;
-        
-        // they should all be grouped by timeslot, so i'm only interested in the first object.
-        Session *a = (Session *)aArray[0];
-        Session *b = (Session *)bArray[0];
-        
-        NSInteger aTimeSlotIndex = [mondayTimeOrdering indexOfObject:a.timeslot.timeRange];
-        NSInteger bTimeSlotIndex = [mondayTimeOrdering indexOfObject:b.timeslot.timeRange];
-        
-        return aTimeSlotIndex > bTimeSlotIndex;
-    }];
-    
-    NSArray *sortedTuesdayArray = [tuesdayByTimeSlot sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        
-        NSArray *tuesdayTimeOrdering = @[
-                                         @"7:30 - 8:30",
-                                         @"8:30 - 9:30",
-                                         @"9:45 - 10:45",
-                                         @"10:45 - 11:00",
-                                         @"11:00 - 12:00",
-                                         @"12:00 - 1:00",
-                                         @"1:00 - 2:00",
-                                         @"2:00 - 2:15",
-                                         @"2:15 - 3:15",
-                                         @"3:30 - 4:30"];
-        NSArray *aArray = (NSArray *)obj1;
-        NSArray *bArray = (NSArray *)obj2;
-        
-        // they should all be grouped by timeslot, so i'm only interested in the first object.
-        Session *a = (Session *)aArray[0];
-        Session *b = (Session *)bArray[0];
-        
-        NSInteger aTimeSlotIndex = [tuesdayTimeOrdering indexOfObject:a.timeslot.timeRange];
-        NSInteger bTimeSlotIndex = [tuesdayTimeOrdering indexOfObject:b.timeslot.timeRange];
-        
-        return aTimeSlotIndex > bTimeSlotIndex;
-    }];
-    
-    
-    // now i have two arrays, monday and tuesday.
-    NSArray *allEvents = @[sortedMondayArray, sortedTuesdayArray];
-    
-    modifiedDataSource = [[NSArray alloc] initWithArray:allEvents];
     
     [_sessionsCollectionView reloadData];
 }
@@ -186,12 +83,12 @@
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return [modifiedDataSource count];
+    return [_dataSource.sortedSessionsByTimeslot count];
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (modifiedDataSource.count >= section) {
-        return [modifiedDataSource[section] count];
+    if (_dataSource.sortedSessionsByTimeslot.count >= section) {
+        return [_dataSource.sortedSessionsByTimeslot[section] count];
     }
     return 0;
 }
@@ -207,9 +104,9 @@
     ContainerCollectionViewCell *containerCell = [self.sessionsCollectionView dequeueReusableCellWithReuseIdentifier:@"ContainerCell" forIndexPath:indexPath];
     
     NSArray *sessions;
-    if (modifiedDataSource.count >= indexPath.section) {
-        if ([modifiedDataSource[indexPath.section] count] >= indexPath.row) {
-            sessions = modifiedDataSource[indexPath.section][indexPath.row];
+    if (_dataSource.sortedSessionsByTimeslot.count >= indexPath.section) {
+        if ([_dataSource.sortedSessionsByTimeslot[indexPath.section] count] >= indexPath.row) {
+            sessions = _dataSource.sortedSessionsByTimeslot[indexPath.section][indexPath.row];
         }
     }
     // what's returned is an array ... lets build a UIView thinger.
