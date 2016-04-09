@@ -8,8 +8,16 @@
 
 #import "SessionDetailsViewController.h"
 
-@interface SessionDetailsViewController ()
+#import "Session.h"
+#import "Room.h"
+#import "Speaker.h"
+#import "Timeslot.h"
 
+@interface SessionDetailsViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sessionSpeakerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sessionSpeakerCompanyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sessionDetailsLabel;
 @end
 
 @implementation SessionDetailsViewController
@@ -17,11 +25,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self config];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"Session: %@", _session.title);
+}
+
+- (void)config {
+    if (_session) {
+        self.sessionTitleLabel.text = _session.title;
+        self.sessionSpeakerLabel.text = _session.speaker.name;
+        self.sessionSpeakerCompanyLabel.text = _session.speaker.companyName.length > 2
+        ? [NSString stringWithFormat:@"(%@)", _session.speaker.companyName]
+        : @"";
+        self.sessionDetailsLabel.text = _session.sessionDescription;
+    }
     
 }
 - (void)didReceiveMemoryWarning {
