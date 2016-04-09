@@ -26,6 +26,7 @@
 		CB49DD631CADA6150062F9D2 /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD621CADA6150062F9D2 /* Speaker.m */; };
 		CB49DD661CADA92E0062F9D2 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD651CADA92E0062F9D2 /* Session.m */; };
 		CB49DD691CADBFE70062F9D2 /* SessionsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */; };
+		FE48A8CD1CB97FD500FF3229 /* PDCFavoritesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48A8CC1CB97FD500FF3229 /* PDCFavoritesRepository.m */; };
 		FE872BB41CB95BF000DCD478 /* SessionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE872BB31CB95BF000DCD478 /* SessionHeaderCell.xib */; };
 		FE872BB71CB95C3100DCD478 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE872BB61CB95C3100DCD478 /* HeaderCell.m */; };
 		FE872BBD1CB9634600DCD478 /* ContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE872BBB1CB9634600DCD478 /* ContainerCollectionViewCell.m */; };
@@ -68,6 +69,8 @@
 		CB49DD651CADA92E0062F9D2 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		CB49DD671CADBFE70062F9D2 /* SessionsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionsDataSource.h; sourceTree = "<group>"; };
 		CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionsDataSource.m; sourceTree = "<group>"; };
+		FE48A8CB1CB97FD500FF3229 /* PDCFavoritesRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDCFavoritesRepository.h; sourceTree = "<group>"; };
+		FE48A8CC1CB97FD500FF3229 /* PDCFavoritesRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDCFavoritesRepository.m; sourceTree = "<group>"; };
 		FE872BB31CB95BF000DCD478 /* SessionHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionHeaderCell.xib; sourceTree = "<group>"; };
 		FE872BB51CB95C3100DCD478 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
 		FE872BB61CB95C3100DCD478 /* HeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
@@ -106,6 +109,8 @@
 				CB49DD511CAD7EFF0062F9D2 /* TimeslotsDataSource.m */,
 				CB49DD671CADBFE70062F9D2 /* SessionsDataSource.h */,
 				CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */,
+				FE48A8CB1CB97FD500FF3229 /* PDCFavoritesRepository.h */,
+				FE48A8CC1CB97FD500FF3229 /* PDCFavoritesRepository.m */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				CB49DD601CADA38D0062F9D2 /* Room.m in Sources */,
 				CB025CAA1CADC28B007BF6A9 /* SessionsViewController.m in Sources */,
 				CB49DD521CAD7EFF0062F9D2 /* TimeslotsDataSource.m in Sources */,
+				FE48A8CD1CB97FD500FF3229 /* PDCFavoritesRepository.m in Sources */,
 				CB025CB01CAE02DE007BF6A9 /* SessionCollectionViewCell.m in Sources */,
 				CB49DD631CADA6150062F9D2 /* Speaker.m in Sources */,
 			);

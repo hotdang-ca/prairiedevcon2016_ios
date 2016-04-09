@@ -12,6 +12,8 @@
 #import "Timeslot.h"
 #import "Room.h"
 
+#import "PDCFavoritesRepository.h"
+
 #import <UIGestureRecognizer+BlocksKit.h>
 
 CGFloat CORNER_RADIUS = 8.0;
@@ -64,13 +66,18 @@ CGFloat BORDER_WIDTH = 2.0;
                                             , session.timeslot.timeRange];
     _sessionRoomNameLabel.text = session.room.name;
     // should be selected
+    NSArray *favorites = [PDCFavoritesRepository sharedRepository].listOfFavorites;
     
+    if ([favorites indexOfObject:session.identifier] != NSNotFound) {
+        [self configureAsSelected:YES];
+    }
     
     [self configureActionsWithSession:session];
 }
 
 -(void)configureActionsWithSession:(Session *)session {
     id tapGestureBlock = ^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location){
+        [[PDCFavoritesRepository sharedRepository] toggleFavorited:session.identifier];
         [self configureAsSelected:!self.selected];
     };
     UITapGestureRecognizer *onTapRecognizer = [UITapGestureRecognizer bk_recognizerWithHandler:tapGestureBlock];
