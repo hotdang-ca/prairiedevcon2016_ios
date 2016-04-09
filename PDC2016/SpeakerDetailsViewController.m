@@ -40,6 +40,9 @@
         self.speakerCompanyLabel.text = _speaker.companyName;
         self.speakerCityAndRegionLabel.text = [NSString stringWithFormat:@"%@, %@", _speaker.city, _speaker.region];
         self.speakerBioTextView.text = _speaker.bio;
+        
+        [self.speakerBioTextView scrollRangeToVisible:NSMakeRange(0, 0)];
+        
         [self.speakerImageView setImageWithURL:[NSURL URLWithString:_speaker.imageUrlString]placeholderImage:[UIImage imageNamed:@"PrDCLogo"]];
         
         if (_speaker.webUrlString && _speaker.webUrlString.length > 0) {

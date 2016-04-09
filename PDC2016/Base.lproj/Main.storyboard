@@ -17,9 +17,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="a3S-8N-HjA" kind="relationship" relationship="viewControllers" id="Z10-cm-7aN"/>
                         <segue destination="cky-XT-MOm" kind="relationship" relationship="viewControllers" id="RCp-gc-wsw"/>
-                        <segue destination="Bzo-GA-Vkd" kind="relationship" relationship="viewControllers" id="HZ4-Iu-vaS"/>
                         <segue destination="3wM-a1-wfU" kind="relationship" relationship="viewControllers" id="q9y-C5-btY"/>
                     </connections>
                 </tabBarController>
@@ -39,7 +37,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wCj-vr-kOl">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wCj-vr-kOl">
                                 <rect key="frame" x="0.0" y="72" width="600" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="Zgp-Uz-AZx"/>
@@ -65,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43u-Ua-rpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1576" y="-285"/>
+            <point key="canvasLocation" x="3352" y="2027"/>
         </scene>
         <!--Sessions-->
         <scene sceneID="u98-3i-EJV">
@@ -124,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2HO-8w-V4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1576" y="1326"/>
+            <point key="canvasLocation" x="3352" y="1358"/>
         </scene>
         <!--About-->
         <scene sceneID="M5V-ko-2eR">
@@ -163,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gac-nX-Imq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="2320"/>
+            <point key="canvasLocation" x="764" y="1200"/>
         </scene>
         <!--Timeslots-->
         <scene sceneID="z81-VB-suk">
@@ -182,7 +180,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l52-1N-c88" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="-285"/>
+            <point key="canvasLocation" x="2540" y="2027"/>
         </scene>
         <!--Sessions-->
         <scene sceneID="g7g-ZV-OxM">
@@ -220,7 +218,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iBI-02-ksr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="1326"/>
+            <point key="canvasLocation" x="2540" y="1358"/>
         </scene>
     </scenes>
 </document>

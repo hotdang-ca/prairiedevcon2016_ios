@@ -53,6 +53,8 @@
                                    , _session.room.name];
         self.keywordsLabel.text = _session.keywordString;
         
+        [self.sessionDetailsTextView scrollRangeToVisible:NSMakeRange(0, 0)];
+        
         [self setupGestures];
     }
     
