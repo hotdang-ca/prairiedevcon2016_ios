@@ -29,6 +29,7 @@ CGFloat BORDER_WIDTH = 2.0;
 @property (weak, nonatomic) IBOutlet UILabel *sessionSpeakerCompany;
 @property (weak, nonatomic) IBOutlet UILabel *sessionTimeslotDayAndTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionRoomNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
 @end
 
 @implementation SessionCollectionViewCell
@@ -81,7 +82,10 @@ CGFloat BORDER_WIDTH = 2.0;
         [self configureAsSelected:!self.selected];
     };
     UITapGestureRecognizer *onTapRecognizer = [UITapGestureRecognizer bk_recognizerWithHandler:tapGestureBlock];
-    [self.contentView setGestureRecognizers:@[onTapRecognizer]];
+    
+    // TODO: this should only be on the Favorites button
+    // What favorites button? Oh yeah...
+    [self.favoriteImageView setGestureRecognizers:@[onTapRecognizer]];
 }
 
 -(void)configureAsSelected:(BOOL)selected {
@@ -89,7 +93,9 @@ CGFloat BORDER_WIDTH = 2.0;
     
     self.layer.borderWidth = BORDER_WIDTH;
     self.layer.cornerRadius = CORNER_RADIUS;
-    self.layer.borderColor = self.selected ? SELECTED_BORDER_COLOR.CGColor : UNSELECTED_BORDER_COLOR.CGColor;
+    self.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
     self.backgroundColor = [UIColor greenColor];
+    
+    self.favoriteImageView.image = [UIImage imageNamed:selected ? @"b_favorite" : @"b_no_favorite"];
 }
 @end
