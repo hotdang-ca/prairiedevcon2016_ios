@@ -9,11 +9,14 @@
 #import "SessionsViewController.h"
 #import "SessionsDataSource.h"
 #import "SessionCollectionViewCell.h"
+#import "ContainerCollectionViewCell.h"
 
 #import "Session.h"
 #import "Room.h"
 #import "Timeslot.h"
 #import "Speaker.h"
+
+#import "HeaderCell.h"
 
 @interface SessionsViewController ()
 @property (strong, nonatomic) SessionsDataSource *dataSource;
@@ -22,6 +25,7 @@
 
 @implementation SessionsViewController {
     UICollectionViewFlowLayout *collectionViewLayout;
+    NSArray *modifiedDataSource;
 }
 
 - (void)viewDidLoad {
@@ -29,6 +33,8 @@
     
     _dataSource = [SessionsDataSource sharedDataSource];
     [_dataSource addObserver:self forKeyPath:@"sessions" options:0 context:NULL];
+    
+    modifiedDataSource = [[NSArray alloc] init];
     
     [self setupCollectionViewCell];
     [_dataSource reloadSessions];
@@ -58,6 +64,7 @@
     
     NSArray *uniqueTimeDateSlots = [_dataSource.sessions valueForKeyPath:@"@distinctUnionOfObjects.timeslot.timeRange"];
 
+    
     NSMutableArray *mondayEvents = [NSMutableArray array];
     NSMutableArray *tuesdayEvents = [NSMutableArray array];
     
@@ -98,13 +105,62 @@
         }
     }
     
-    NSLog(@"%@ %@", mondayByTimeSlot, tuesdayByTimeSlot);
+    NSArray *sortedMondayArray = [mondayByTimeSlot sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        NSArray *mondayTimeOrdering = @[
+                                        @"7:30 - 8:30",
+                                        @"8:30 - 9:30",
+                                        @"9:45 - 10:45",
+                                        @"11:00 - 12:00",
+                                        @"12:00 - 1:00",
+                                        @"1:00 - 2:00",
+                                        @"2:00 - 2:15",
+                                        @"2:15 - 3:15",
+                                        @"3:30 - 4:30",
+                                        ];
+        NSArray *aArray = (NSArray *)obj1;
+        NSArray *bArray = (NSArray *)obj2;
+        
+        // they should all be grouped by timeslot, so i'm only interested in the first object.
+        Session *a = (Session *)aArray[0];
+        Session *b = (Session *)bArray[0];
+        
+        NSInteger aTimeSlotIndex = [mondayTimeOrdering indexOfObject:a.timeslot.timeRange];
+        NSInteger bTimeSlotIndex = [mondayTimeOrdering indexOfObject:b.timeslot.timeRange];
+        
+        return aTimeSlotIndex > bTimeSlotIndex;
+    }];
+    
+    NSArray *sortedTuesdayArray = [tuesdayByTimeSlot sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        
+        NSArray *tuesdayTimeOrdering = @[
+                                         @"7:30 - 8:30",
+                                         @"8:30 - 9:30",
+                                         @"9:45 - 10:45",
+                                         @"10:45 - 11:00",
+                                         @"11:00 - 12:00",
+                                         @"12:00 - 1:00",
+                                         @"1:00 - 2:00",
+                                         @"2:00 - 2:15",
+                                         @"2:15 - 3:15",
+                                         @"3:30 - 4:30"];
+        NSArray *aArray = (NSArray *)obj1;
+        NSArray *bArray = (NSArray *)obj2;
+        
+        // they should all be grouped by timeslot, so i'm only interested in the first object.
+        Session *a = (Session *)aArray[0];
+        Session *b = (Session *)bArray[0];
+        
+        NSInteger aTimeSlotIndex = [tuesdayTimeOrdering indexOfObject:a.timeslot.timeRange];
+        NSInteger bTimeSlotIndex = [tuesdayTimeOrdering indexOfObject:b.timeslot.timeRange];
+        
+        return aTimeSlotIndex > bTimeSlotIndex;
+    }];
+    
     
     // now i have two arrays, monday and tuesday.
-    NSArray *allEvents = @[mondayByTimeSlot, tuesdayByTimeSlot];
+    NSArray *allEvents = @[sortedMondayArray, sortedTuesdayArray];
     
-    NSLog(@"All events: %@", allEvents);
-    
+    modifiedDataSource = [[NSArray alloc] initWithArray:allEvents];
     
     [_sessionsCollectionView reloadData];
 }
@@ -117,30 +173,92 @@
     [collectionViewLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     collectionViewLayout.minimumLineSpacing = 8;
     collectionViewLayout.minimumInteritemSpacing = 8;
-    [self.sessionsCollectionView setCollectionViewLayout:collectionViewLayout];
     
-    UINib *nib = [UINib nibWithNibName:@"SessionCollectionViewCell"
+    UINib *nib = [UINib nibWithNibName:@"ContainerCollectionViewCell"
                                 bundle:[NSBundle mainBundle]];
-    [self.sessionsCollectionView registerNib:nib forCellWithReuseIdentifier:kSessionReuseIdentifier];
+    [self.sessionsCollectionView registerNib:nib forCellWithReuseIdentifier:@"ContainerCell"];
+    
+    UINib *headerNib = [UINib nibWithNibName:@"SessionHeaderCell" bundle:[NSBundle mainBundle]];
+    [self.sessionsCollectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell"];
+    [collectionViewLayout setHeaderReferenceSize:CGSizeMake(250, 30)];
+    
+    [self.sessionsCollectionView setCollectionViewLayout:collectionViewLayout];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return [modifiedDataSource count];
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _dataSource.sessions.count;
+    if (modifiedDataSource.count >= section) {
+        return [modifiedDataSource[section] count];
+    }
+    return 0;
+}
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    HeaderCell *headerCell = [self.sessionsCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell" forIndexPath:indexPath];
+    
+    headerCell.headerTitleLabel.text = indexPath.section == 0 ? @"Monday" : @"Tuesday";
+    return headerCell;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SessionCollectionViewCell *sessionCell = [self.sessionsCollectionView dequeueReusableCellWithReuseIdentifier:kSessionReuseIdentifier forIndexPath:indexPath];
-    Session *session = [_dataSource.sessions objectAtIndex:indexPath.row];
+    ContainerCollectionViewCell *containerCell = [self.sessionsCollectionView dequeueReusableCellWithReuseIdentifier:@"ContainerCell" forIndexPath:indexPath];
     
-    if (sessionCell && session) {
-        [sessionCell configureWithSession:session];
+    NSArray *sessions;
+    if (modifiedDataSource.count >= indexPath.section) {
+        if ([modifiedDataSource[indexPath.section] count] >= indexPath.row) {
+            sessions = modifiedDataSource[indexPath.section][indexPath.row];
+        }
+    }
+    // what's returned is an array ... lets build a UIView thinger.
+    UIScrollView *scrollView = containerCell.containingScrollView;
+    
+    // this cell might be recycled; remove subviews
+    [scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    UILabel *label = containerCell.timeslotLabel;
+    Session *anySession = sessions[0];
+    label.text = anySession.timeslot.timeRange;
+    
+    scrollView.contentSize = CGSizeMake((containerCell.frame.size.width + 4) * sessions.count, containerCell.frame.size.height - label.frame.size.height - 8);
+    scrollView.scrollEnabled = YES;
+    scrollView.pagingEnabled = YES;
+    scrollView.directionalLockEnabled = YES;
+
+    if (sessions) {
+
+        int iterator = 0;
+        CGFloat const spacing = 2.0;
+        
+        for (Session *session in sessions) {
+            CGRect viewRect = CGRectMake(
+                       iterator * scrollView.frame.size.width + spacing,
+                       0,
+                       scrollView.frame.size.width - spacing,
+                       scrollView.frame.size.height);
+            
+            SessionCollectionViewCell *sessionCell = [[[NSBundle mainBundle] loadNibNamed:@"SessionCollectionViewCell" owner:self options:nil] firstObject];
+            sessionCell.frame = viewRect;
+            
+            sessionCell.layer.borderWidth = 4;
+            sessionCell.layer.borderColor = [UIColor blackColor].CGColor;
+            sessionCell.layer.cornerRadius = 8.0;
+            
+            sessionCell.backgroundColor = [UIColor greenColor];
+            
+            [sessionCell configureWithSession:session];
+            
+            [scrollView addSubview:sessionCell];
+            iterator++;
+        }
+        
     }
     
-    return sessionCell;
+//    [containerCell addSubview:scrollView];
+    
+    return containerCell;
 }
 
 

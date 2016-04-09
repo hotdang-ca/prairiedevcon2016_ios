@@ -31,7 +31,17 @@
     containingView.layer.borderColor = [UIColor blackColor].CGColor;
     containingView.layer.borderWidth = 2.0;
     containingView.layer.cornerRadius = 5.0;
+}
 
+-(instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        UIView *containingView = self.sessionTitleLabel.superview;
+        containingView.layer.borderColor = [UIColor blackColor].CGColor;
+        containingView.layer.borderWidth = 2.0;
+        containingView.layer.cornerRadius = 5.0;
+    }
+    return self;
 }
 
 -(void)configureWithSession:(Session *)session {
@@ -39,10 +49,13 @@
     _sessionKeywordsLabel.text = session.keywordString; // don't need the individual keywords... yet...
     _sessionDescriptionLabel.text = session.sessionDescription;
     _sessionSpeakerNameLabel.text = session.speaker.name;
-    _sessionSpeakerCompany.text = [NSString stringWithFormat:@"(%@)", session.speaker.companyName];
+    
+    _sessionSpeakerCompany.text = session.speaker.companyName.length > 2 ? [NSString stringWithFormat:@"(%@)", session.speaker.companyName] : @"";
+    
     _sessionTimeslotDayAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@"
                                             , session.timeslot.day
                                             , session.timeslot.timeRange];
     _sessionRoomNameLabel.text = session.room.name;
 }
+
 @end
