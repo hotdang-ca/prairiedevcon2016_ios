@@ -36,6 +36,7 @@
 
 - (void)configure {
     if (_speaker) {
+        
         self.speakerNameLabel.text = _speaker.name;
         self.speakerCompanyLabel.text = _speaker.companyName;
         self.speakerCityAndRegionLabel.text = [NSString stringWithFormat:@"%@, %@", _speaker.city, _speaker.region];

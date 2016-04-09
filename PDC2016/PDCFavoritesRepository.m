@@ -36,6 +36,7 @@
 #pragma mark - Instance Methods
 -(void)toggleFavorited:(NSNumber *)identifier {
     if (self.sharedFavorites) {
+        [self willChangeValueForKey:@"listOfFavorites"];
         
         if ([self.sharedFavorites indexOfObject:identifier] == NSNotFound) {
             [self.sharedFavorites addObject:identifier];
@@ -43,12 +44,21 @@
             [self.sharedFavorites removeObject:identifier];
         }
         
+        [self didChangeValueForKey:@"listOfFavorites"];
+        
         [self.class saveToPrefs:self.sharedFavorites];
     }
 }
 
 -(NSArray *)listOfFavorites {
     return [NSArray arrayWithArray:self.sharedFavorites];
+}
+
+-(BOOL)isFavorite:(NSNumber *)identifier {
+    if (self.sharedFavorites) {
+        return [self.sharedFavorites indexOfObject:identifier] != NSNotFound;
+    }
+    return NO;
 }
 
 #pragma mark - Internal Helpers

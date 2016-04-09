@@ -14,8 +14,9 @@
 #import "Timeslot.h"
 
 #import "SpeakerDetailsViewController.h"
+#import "PDCFavoritesRepository.h"
 
-#import <UIGestureRecognizer+BlocksKit.h>
+#import <BlocksKit+UIKit.h>
 
 @interface SessionDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
@@ -39,6 +40,10 @@
     [super viewDidAppear:animated];
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [[PDCFavoritesRepository sharedRepository] bk_removeObserversWithIdentifier:@"favoritesChanged"];
+}
+
 - (void)config {
     if (_session) {
         self.sessionTitleLabel.text = _session.title;
@@ -56,10 +61,25 @@
         [self.sessionDetailsTextView scrollRangeToVisible:NSMakeRange(0, 0)];
         
         [self setupGestures];
+        
+        
+        BOOL isFavorite = [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier];
+        
+        UIImage *image = [UIImage imageNamed:isFavorite ? @"fav_bar" : @"no_fav_bar"];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:image style:UIBarButtonItemStylePlain handler:^(id sender) {
+            [[PDCFavoritesRepository sharedRepository] toggleFavorited:_session.identifier];
+            [self changeFavoriteImage: [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier]];
+        }];
     }
     
 }
 
+-(void)changeFavoriteImage:(BOOL)isFavorite {
+    UIBarButtonItem *favButton = self.navigationItem.rightBarButtonItem;
+    if (favButton) {
+        [favButton setImage:[UIImage imageNamed:isFavorite ? @"fav_bar" : @"no_fav_bar"]];
+    }
+}
 -(void)setupGestures {
     
     self.sessionSpeakerLabel.userInteractionEnabled = YES;
