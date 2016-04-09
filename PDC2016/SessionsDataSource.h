@@ -15,4 +15,5 @@
 -(void)reloadSessions;
 
 @property (strong, nonatomic) NSArray *sessions;
+@property (strong, nonatomic) NSArray *sortedSessionsByTimeslot;
 @end
