@@ -13,6 +13,10 @@
 #import "Speaker.h"
 #import "Timeslot.h"
 
+#import "SpeakerDetailsViewController.h"
+
+#import <UIGestureRecognizer+BlocksKit.h>
+
 @interface SessionDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionSpeakerLabel;
@@ -40,7 +44,24 @@
         ? [NSString stringWithFormat:@"(%@)", _session.speaker.companyName]
         : @"";
         self.sessionDetailsLabel.text = _session.sessionDescription;
+        
+        [self setupGestures];
     }
+    
+}
+
+-(void)setupGestures {
+    
+    self.sessionSpeakerLabel.userInteractionEnabled = YES;
+    
+    [self.sessionSpeakerLabel addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        SpeakerDetailsViewController *speakerDetails = [[SpeakerDetailsViewController alloc] initWithNibName:NSStringFromClass(SpeakerDetailsViewController.class) bundle:[NSBundle mainBundle]];
+        if (speakerDetails) {
+            speakerDetails.speaker = _session.speaker;
+            
+            [self.navigationController pushViewController:speakerDetails animated:YES];
+        }
+    }]];
     
 }
 - (void)didReceiveMemoryWarning {
