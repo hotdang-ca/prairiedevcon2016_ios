@@ -14,5 +14,6 @@
 
 -(void)toggleFavorited:(NSNumber *)identifier;
 -(NSArray *)listOfFavorites;
+-(BOOL)isFavorite:(NSNumber *)identifier;
 
 @end

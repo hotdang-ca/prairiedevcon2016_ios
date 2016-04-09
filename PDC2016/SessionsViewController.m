@@ -10,6 +10,7 @@
 #import "SessionsDataSource.h"
 #import "SessionCollectionViewCell.h"
 #import "ContainerCollectionViewCell.h"
+#import "SessionDetailsViewController.h"
 
 #import "Session.h"
 #import "Room.h"
@@ -17,6 +18,9 @@
 #import "Speaker.h"
 
 #import "HeaderCell.h"
+
+#import "PDCFavoritesRepository.h"
+#import <BlocksKit+UIKit.h>
 
 @interface SessionsViewController ()
 @property (strong, nonatomic) SessionsDataSource *dataSource;
@@ -32,6 +36,7 @@
     
     _dataSource = [SessionsDataSource sharedDataSource];
     [_dataSource addObserver:self forKeyPath:@"sessions" options:0 context:NULL];
+    
     [self setupCollectionViewCell];
     [_dataSource reloadSessions];
     
@@ -47,6 +52,15 @@
     [_dataSource reloadSessions];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    @try {
+        [[PDCFavoritesRepository sharedRepository] removeObserver:self forKeyPath:@"listOfFavorites"];
+    } @catch (NSException *exception) {
+        // why crash for such a thing?
+    } @finally {
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -57,8 +71,6 @@
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    
-    
     [_sessionsCollectionView reloadData];
 }
 
@@ -141,6 +153,15 @@
             sessionCell.frame = viewRect;
             [sessionCell configureWithSession:session];
             
+            [sessionCell addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+                
+                SessionDetailsViewController *detailsController = [[SessionDetailsViewController alloc] initWithNibName:@"SessionDetailsViewController" bundle:[NSBundle mainBundle]];
+                detailsController.session = session;
+                [self.navigationController pushViewController:detailsController animated:YES];
+                
+                [[PDCFavoritesRepository sharedRepository] addObserver:self forKeyPath:@"listOfFavorites" options:0 context:NULL];
+            }]];
+            
             [scrollView addSubview:sessionCell];
             
             if (sessionCell.selected) {
@@ -161,7 +182,6 @@
     
     return containerCell;
 }
-
 
 /*
 #pragma mark - Navigation
