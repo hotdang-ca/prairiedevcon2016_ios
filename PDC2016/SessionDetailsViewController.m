@@ -21,7 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionSpeakerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionSpeakerCompanyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sessionDetailsLabel;
+@property (weak, nonatomic) IBOutlet UITextView *sessionDetailsTextView;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *keywordsLabel;
+
 @end
 
 @implementation SessionDetailsViewController
@@ -43,7 +46,12 @@
         self.sessionSpeakerCompanyLabel.text = _session.speaker.companyName.length > 2
         ? [NSString stringWithFormat:@"(%@)", _session.speaker.companyName]
         : @"";
-        self.sessionDetailsLabel.text = _session.sessionDescription;
+        self.sessionDetailsTextView.text = _session.sessionDescription;
+        
+        self.locationLabel.text = [NSString stringWithFormat:@"%@ - %@"
+                                   , _session.timeslot.timeRange
+                                   , _session.room.name];
+        self.keywordsLabel.text = _session.keywordString;
         
         [self setupGestures];
     }
