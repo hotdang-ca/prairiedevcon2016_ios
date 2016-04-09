@@ -54,7 +54,6 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="99f-a4-kqT" firstAttribute="leading" secondItem="LsP-0B-OjB" secondAttribute="leading" constant="8" id="4EQ-Kb-8rz"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NKX-dN-LQQ" secondAttribute="trailing" constant="8" id="6wY-5D-TzY"/>
@@ -91,6 +90,7 @@
                 <outlet property="sessionSpeakerCompany" destination="cpk-sG-UBW" id="rMG-Qu-g3a"/>
                 <outlet property="sessionSpeakerNameLabel" destination="1bW-9k-3s3" id="0rt-k9-p4k"/>
                 <outlet property="sessionTitleLabel" destination="99f-a4-kqT" id="sXc-Dw-5y5"/>
+                <outlet property="view" destination="LsP-0B-OjB" id="3jx-0a-Oe2"/>
             </connections>
             <point key="canvasLocation" x="377.5" y="364"/>
         </collectionViewCell>

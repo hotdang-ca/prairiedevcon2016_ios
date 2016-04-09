@@ -20,6 +20,7 @@ CGFloat CORNER_RADIUS = 8.0;
 CGFloat BORDER_WIDTH = 2.0;
 #define SELECTED_BORDER_COLOR [UIColor yellowColor]
 #define UNSELECTED_BORDER_COLOR [UIColor blackColor]
+#define BACKGROUND_COLOR [UIColor colorWithRed:203/255 green:91/255 blue:94/255 alpha:1.0]
 
 @interface SessionCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
@@ -30,6 +31,8 @@ CGFloat BORDER_WIDTH = 2.0;
 @property (weak, nonatomic) IBOutlet UILabel *sessionTimeslotDayAndTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionRoomNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
+@property (weak, nonatomic) IBOutlet UIView *view;
+
 @end
 
 @implementation SessionCollectionViewCell
@@ -73,6 +76,7 @@ CGFloat BORDER_WIDTH = 2.0;
         [self configureAsSelected:YES];
     }
     
+    self.view.backgroundColor = [UIColor whiteColor];
     [self configureActionsWithSession:session];
 }
 
@@ -86,7 +90,7 @@ CGFloat BORDER_WIDTH = 2.0;
     // TODO: this should only be on the Favorites button
     // What favorites button? Oh yeah...
     [self.favoriteImageView setGestureRecognizers:@[onTapRecognizer]];
-}
+} 
 
 -(void)configureAsSelected:(BOOL)selected {
     self.selected = selected;
@@ -94,7 +98,6 @@ CGFloat BORDER_WIDTH = 2.0;
     self.layer.borderWidth = BORDER_WIDTH;
     self.layer.cornerRadius = CORNER_RADIUS;
     self.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
-    self.backgroundColor = [UIColor greenColor];
     
     self.favoriteImageView.image = [UIImage imageNamed:selected ? @"b_favorite" : @"b_no_favorite"];
 }

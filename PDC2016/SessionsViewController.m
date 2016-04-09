@@ -126,9 +126,9 @@
     scrollView.directionalLockEnabled = YES;
 
     if (sessions) {
-
         int iterator = 0;
         CGFloat const spacing = 2.0;
+        CGRect favoriteRect = CGRectNull;
         
         for (Session *session in sessions) {
             CGRect viewRect = CGRectMake(
@@ -142,12 +142,22 @@
             [sessionCell configureWithSession:session];
             
             [scrollView addSubview:sessionCell];
+            
+            if (sessionCell.selected) {
+                favoriteRect = viewRect;
+            }
+            
             iterator++;
         }
         
+        if (! CGRectIsNull(favoriteRect)) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [scrollView scrollRectToVisible:favoriteRect animated:YES];
+            });
+        }
     }
     
-//    [containerCell addSubview:scrollView];
+    [scrollView layoutIfNeeded];
     
     return containerCell;
 }
