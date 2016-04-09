@@ -26,6 +26,11 @@
 		CB49DD631CADA6150062F9D2 /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD621CADA6150062F9D2 /* Speaker.m */; };
 		CB49DD661CADA92E0062F9D2 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD651CADA92E0062F9D2 /* Session.m */; };
 		CB49DD691CADBFE70062F9D2 /* SessionsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */; };
+		FE48A8CD1CB97FD500FF3229 /* PDCFavoritesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48A8CC1CB97FD500FF3229 /* PDCFavoritesRepository.m */; };
+		FE872BB41CB95BF000DCD478 /* SessionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE872BB31CB95BF000DCD478 /* SessionHeaderCell.xib */; };
+		FE872BB71CB95C3100DCD478 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE872BB61CB95C3100DCD478 /* HeaderCell.m */; };
+		FE872BBD1CB9634600DCD478 /* ContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE872BBB1CB9634600DCD478 /* ContainerCollectionViewCell.m */; };
+		FE872BBE1CB9634600DCD478 /* ContainerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE872BBC1CB9634600DCD478 /* ContainerCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +69,14 @@
 		CB49DD651CADA92E0062F9D2 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		CB49DD671CADBFE70062F9D2 /* SessionsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionsDataSource.h; sourceTree = "<group>"; };
 		CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionsDataSource.m; sourceTree = "<group>"; };
+		FE48A8CB1CB97FD500FF3229 /* PDCFavoritesRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDCFavoritesRepository.h; sourceTree = "<group>"; };
+		FE48A8CC1CB97FD500FF3229 /* PDCFavoritesRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDCFavoritesRepository.m; sourceTree = "<group>"; };
+		FE872BB31CB95BF000DCD478 /* SessionHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionHeaderCell.xib; sourceTree = "<group>"; };
+		FE872BB51CB95C3100DCD478 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
+		FE872BB61CB95C3100DCD478 /* HeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
+		FE872BBA1CB9634600DCD478 /* ContainerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerCollectionViewCell.h; sourceTree = "<group>"; };
+		FE872BBB1CB9634600DCD478 /* ContainerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerCollectionViewCell.m; sourceTree = "<group>"; };
+		FE872BBC1CB9634600DCD478 /* ContainerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +109,8 @@
 				CB49DD511CAD7EFF0062F9D2 /* TimeslotsDataSource.m */,
 				CB49DD671CADBFE70062F9D2 /* SessionsDataSource.h */,
 				CB49DD681CADBFE70062F9D2 /* SessionsDataSource.m */,
+				FE48A8CB1CB97FD500FF3229 /* PDCFavoritesRepository.h */,
+				FE48A8CC1CB97FD500FF3229 /* PDCFavoritesRepository.m */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -118,10 +133,14 @@
 		CB025CB21CAE065B007BF6A9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				FE872BB51CB95C3100DCD478 /* HeaderCell.h */,
+				FE872BB61CB95C3100DCD478 /* HeaderCell.m */,
 				CB025CAD1CAE02DE007BF6A9 /* SessionCollectionViewCell.h */,
 				CB025CAE1CAE02DE007BF6A9 /* SessionCollectionViewCell.m */,
 				CB49DD591CAD94F40062F9D2 /* TimeSlotCollectionViewCell.h */,
 				CB49DD5A1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m */,
+				FE872BBA1CB9634600DCD478 /* ContainerCollectionViewCell.h */,
+				FE872BBB1CB9634600DCD478 /* ContainerCollectionViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -129,8 +148,10 @@
 		CB025CB31CAE066D007BF6A9 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				FE872BB31CB95BF000DCD478 /* SessionHeaderCell.xib */,
 				CB49DD5B1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib */,
 				CB025CAF1CAE02DE007BF6A9 /* SessionCollectionViewCell.xib */,
+				FE872BBC1CB9634600DCD478 /* ContainerCollectionViewCell.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -266,10 +287,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE872BBE1CB9634600DCD478 /* ContainerCollectionViewCell.xib in Resources */,
 				CB49DD451CAD77D10062F9D2 /* LaunchScreen.storyboard in Resources */,
 				CB49DD421CAD77D10062F9D2 /* Assets.xcassets in Resources */,
 				CB49DD401CAD77D00062F9D2 /* Main.storyboard in Resources */,
 				CB025CB11CAE02DE007BF6A9 /* SessionCollectionViewCell.xib in Resources */,
+				FE872BB41CB95BF000DCD478 /* SessionHeaderCell.xib in Resources */,
 				CB49DD5D1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,9 +337,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE872BB71CB95C3100DCD478 /* HeaderCell.m in Sources */,
 				CB49DD551CAD806D0062F9D2 /* PDCApiProvider.m in Sources */,
 				CB49DD5C1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.m in Sources */,
 				CB49DD691CADBFE70062F9D2 /* SessionsDataSource.m in Sources */,
+				FE872BBD1CB9634600DCD478 /* ContainerCollectionViewCell.m in Sources */,
 				CB49DD4E1CAD7E750062F9D2 /* TimeslotsViewController.m in Sources */,
 				CB49DD581CAD80B40062F9D2 /* Timeslot.m in Sources */,
 				CB49DD371CAD77D00062F9D2 /* AppDelegate.m in Sources */,
@@ -325,6 +350,7 @@
 				CB49DD601CADA38D0062F9D2 /* Room.m in Sources */,
 				CB025CAA1CADC28B007BF6A9 /* SessionsViewController.m in Sources */,
 				CB49DD521CAD7EFF0062F9D2 /* TimeslotsDataSource.m in Sources */,
+				FE48A8CD1CB97FD500FF3229 /* PDCFavoritesRepository.m in Sources */,
 				CB025CB01CAE02DE007BF6A9 /* SessionCollectionViewCell.m in Sources */,
 				CB49DD631CADA6150062F9D2 /* Speaker.m in Sources */,
 			);

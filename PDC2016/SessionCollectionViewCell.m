@@ -12,6 +12,16 @@
 #import "Timeslot.h"
 #import "Room.h"
 
+#import "PDCFavoritesRepository.h"
+
+#import <UIGestureRecognizer+BlocksKit.h>
+
+CGFloat CORNER_RADIUS = 8.0;
+CGFloat BORDER_WIDTH = 2.0;
+#define SELECTED_BORDER_COLOR [UIColor yellowColor]
+#define UNSELECTED_BORDER_COLOR [UIColor blackColor]
+#define BACKGROUND_COLOR [UIColor colorWithRed:203/255 green:91/255 blue:94/255 alpha:1.0]
+
 @interface SessionCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionKeywordsLabel;
@@ -20,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *sessionSpeakerCompany;
 @property (weak, nonatomic) IBOutlet UILabel *sessionTimeslotDayAndTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionRoomNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
+@property (weak, nonatomic) IBOutlet UIView *view;
+
 @end
 
 @implementation SessionCollectionViewCell
@@ -28,10 +41,20 @@
     [super awakeFromNib];
     // Initialization code
     UIView *containingView = self.sessionTitleLabel.superview;
-    containingView.layer.borderColor = [UIColor blackColor].CGColor;
-    containingView.layer.borderWidth = 2.0;
-    containingView.layer.cornerRadius = 5.0;
+    containingView.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
+    containingView.layer.borderWidth = BORDER_WIDTH;
+    containingView.layer.cornerRadius = CORNER_RADIUS;
+}
 
+-(instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        UIView *containingView = self.sessionTitleLabel.superview;
+        containingView.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
+        containingView.layer.borderWidth = BORDER_WIDTH;
+        containingView.layer.cornerRadius = CORNER_RADIUS;
+    }
+    return self;
 }
 
 -(void)configureWithSession:(Session *)session {
@@ -39,10 +62,43 @@
     _sessionKeywordsLabel.text = session.keywordString; // don't need the individual keywords... yet...
     _sessionDescriptionLabel.text = session.sessionDescription;
     _sessionSpeakerNameLabel.text = session.speaker.name;
-    _sessionSpeakerCompany.text = [NSString stringWithFormat:@"(%@)", session.speaker.companyName];
+    
+    _sessionSpeakerCompany.text = session.speaker.companyName.length > 2 ? [NSString stringWithFormat:@"(%@)", session.speaker.companyName] : @"";
+    
     _sessionTimeslotDayAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@"
                                             , session.timeslot.day
                                             , session.timeslot.timeRange];
     _sessionRoomNameLabel.text = session.room.name;
+    // should be selected
+    NSArray *favorites = [PDCFavoritesRepository sharedRepository].listOfFavorites;
+    
+    if ([favorites indexOfObject:session.identifier] != NSNotFound) {
+        [self configureAsSelected:YES];
+    }
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self configureActionsWithSession:session];
+}
+
+-(void)configureActionsWithSession:(Session *)session {
+    id tapGestureBlock = ^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location){
+        [[PDCFavoritesRepository sharedRepository] toggleFavorited:session.identifier];
+        [self configureAsSelected:!self.selected];
+    };
+    UITapGestureRecognizer *onTapRecognizer = [UITapGestureRecognizer bk_recognizerWithHandler:tapGestureBlock];
+    
+    // TODO: this should only be on the Favorites button
+    // What favorites button? Oh yeah...
+    [self.favoriteImageView setGestureRecognizers:@[onTapRecognizer]];
+} 
+
+-(void)configureAsSelected:(BOOL)selected {
+    self.selected = selected;
+    
+    self.layer.borderWidth = BORDER_WIDTH;
+    self.layer.cornerRadius = CORNER_RADIUS;
+    self.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
+    
+    self.favoriteImageView.image = [UIImage imageNamed:selected ? @"b_favorite" : @"b_no_favorite"];
 }
 @end

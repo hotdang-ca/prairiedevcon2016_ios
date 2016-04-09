@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderCell" id="ETv-ol-Eot" customClass="HeaderCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYz-67-70r">
+                    <rect key="frame" x="139" y="14" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.96752337340000005" blue="0.3230641273" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.0" blue="0.01026766514" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="SYz-67-70r" firstAttribute="centerX" secondItem="ETv-ol-Eot" secondAttribute="centerX" id="hCc-iQ-29k"/>
+                <constraint firstItem="SYz-67-70r" firstAttribute="centerY" secondItem="ETv-ol-Eot" secondAttribute="centerY" id="vD0-WC-Etv"/>
+            </constraints>
+            <connections>
+                <outlet property="headerTitleLabel" destination="SYz-67-70r" id="p7R-F5-BTy"/>
+            </connections>
+            <point key="canvasLocation" x="-24" y="484"/>
+        </collectionReusableView>
+    </objects>
+</document>
