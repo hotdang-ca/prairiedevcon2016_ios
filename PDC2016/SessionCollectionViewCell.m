@@ -12,6 +12,13 @@
 #import "Timeslot.h"
 #import "Room.h"
 
+#import <UIGestureRecognizer+BlocksKit.h>
+
+CGFloat CORNER_RADIUS = 8.0;
+CGFloat BORDER_WIDTH = 2.0;
+#define SELECTED_BORDER_COLOR [UIColor yellowColor]
+#define UNSELECTED_BORDER_COLOR [UIColor blackColor]
+
 @interface SessionCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionKeywordsLabel;
@@ -28,18 +35,18 @@
     [super awakeFromNib];
     // Initialization code
     UIView *containingView = self.sessionTitleLabel.superview;
-    containingView.layer.borderColor = [UIColor blackColor].CGColor;
-    containingView.layer.borderWidth = 2.0;
-    containingView.layer.cornerRadius = 5.0;
+    containingView.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
+    containingView.layer.borderWidth = BORDER_WIDTH;
+    containingView.layer.cornerRadius = CORNER_RADIUS;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         UIView *containingView = self.sessionTitleLabel.superview;
-        containingView.layer.borderColor = [UIColor blackColor].CGColor;
-        containingView.layer.borderWidth = 2.0;
-        containingView.layer.cornerRadius = 5.0;
+        containingView.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
+        containingView.layer.borderWidth = BORDER_WIDTH;
+        containingView.layer.cornerRadius = CORNER_RADIUS;
     }
     return self;
 }
@@ -56,6 +63,26 @@
                                             , session.timeslot.day
                                             , session.timeslot.timeRange];
     _sessionRoomNameLabel.text = session.room.name;
+    // should be selected
+    
+    
+    [self configureActionsWithSession:session];
 }
 
+-(void)configureActionsWithSession:(Session *)session {
+    id tapGestureBlock = ^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location){
+        [self configureAsSelected:!self.selected];
+    };
+    UITapGestureRecognizer *onTapRecognizer = [UITapGestureRecognizer bk_recognizerWithHandler:tapGestureBlock];
+    [self.contentView setGestureRecognizers:@[onTapRecognizer]];
+}
+
+-(void)configureAsSelected:(BOOL)selected {
+    self.selected = selected;
+    
+    self.layer.borderWidth = BORDER_WIDTH;
+    self.layer.cornerRadius = CORNER_RADIUS;
+    self.layer.borderColor = self.selected ? SELECTED_BORDER_COLOR.CGColor : UNSELECTED_BORDER_COLOR.CGColor;
+    self.backgroundColor = [UIColor greenColor];
+}
 @end

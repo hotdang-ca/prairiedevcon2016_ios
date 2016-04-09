@@ -109,6 +109,7 @@
             sessions = _dataSource.sortedSessionsByTimeslot[indexPath.section][indexPath.row];
         }
     }
+    
     // what's returned is an array ... lets build a UIView thinger.
     UIScrollView *scrollView = containerCell.containingScrollView;
     
@@ -138,13 +139,6 @@
             
             SessionCollectionViewCell *sessionCell = [[[NSBundle mainBundle] loadNibNamed:@"SessionCollectionViewCell" owner:self options:nil] firstObject];
             sessionCell.frame = viewRect;
-            
-            sessionCell.layer.borderWidth = 4;
-            sessionCell.layer.borderColor = [UIColor blackColor].CGColor;
-            sessionCell.layer.cornerRadius = 8.0;
-            
-            sessionCell.backgroundColor = [UIColor greenColor];
-            
             [sessionCell configureWithSession:session];
             
             [scrollView addSubview:sessionCell];
