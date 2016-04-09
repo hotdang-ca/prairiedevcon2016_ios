@@ -10,6 +10,7 @@
 #import "SessionsDataSource.h"
 #import "SessionCollectionViewCell.h"
 #import "ContainerCollectionViewCell.h"
+#import "SessionDetailsViewController.h"
 
 #import "Session.h"
 #import "Room.h"
@@ -17,6 +18,8 @@
 #import "Speaker.h"
 
 #import "HeaderCell.h"
+
+#import <UIGestureRecognizer+BlocksKit.h>
 
 @interface SessionsViewController ()
 @property (strong, nonatomic) SessionsDataSource *dataSource;
@@ -141,6 +144,13 @@
             sessionCell.frame = viewRect;
             [sessionCell configureWithSession:session];
             
+            [sessionCell addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+                
+                SessionDetailsViewController *detailsController = [[SessionDetailsViewController alloc] initWithNibName:@"SessionDetailsViewController" bundle:[NSBundle mainBundle]];
+                detailsController.session = session;
+                [self.navigationController pushViewController:detailsController animated:YES];                
+            }]];
+            
             [scrollView addSubview:sessionCell];
             
             if (sessionCell.selected) {
@@ -161,7 +171,6 @@
     
     return containerCell;
 }
-
 
 /*
 #pragma mark - Navigation
