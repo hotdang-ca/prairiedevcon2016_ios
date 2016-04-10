@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Session;
 
 @interface DetailNotesViewController : UIViewController
-@property (strong, nonatomic) Session *session;
+@property (strong, nonatomic) id sessionOrSpeakerObject;
 @end
