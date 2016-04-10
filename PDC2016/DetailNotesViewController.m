@@ -8,6 +8,7 @@
 
 #import "DetailNotesViewController.h"
 #import "Session.h"
+#import "Speaker.h"
 
 #import <IHKeyboardAvoiding.h>
 
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"Notes";
-    [self loadTextForSession:_session];
+    [self loadText];
     [self setupKeyboardAccessories];
     [_notesTextView becomeFirstResponder];
 }
@@ -49,28 +50,44 @@
     [IHKeyboardAvoiding setAvoidingView:_notesTextView];
     
     // get from the notes
-    [self loadTextForSession:_session];
+    [self loadText];
 }
 
 -(void)textViewDidChange:(UITextView *)textView {
     // save to the notes
-    [self saveTextForSession:_session];
+    [self saveText];
 }
 
 #pragma mark - Utilities
-- (void)saveTextForSession:(Session *)sesion {
-    [[NSUserDefaults standardUserDefaults] setObject:_notesTextView.text forKey:[self storageKey]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)saveText {
+    @try {
+        [[NSUserDefaults standardUserDefaults] setObject:_notesTextView.text forKey:[self storageKey]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } @catch (NSException *exception) {
+        //
+    } @finally {
+        //
+    }
+    
 }
 
-- (void)loadTextForSession:(Session *)session {
-    _notesTextView.text = [[NSUserDefaults standardUserDefaults] objectForKey:[self storageKey]];
+- (void)loadText {
+    @try {
+        _notesTextView.text = [[NSUserDefaults standardUserDefaults] objectForKey:[self storageKey]];
+    } @catch (NSException *exception) {
+        //
+    } @finally {
+        //
+    }
 }
 
 -(NSString *)storageKey {
-    NSString *storageKey = [NSString stringWithFormat:@"session_%d", _session.identifier.integerValue];
-    
-    return storageKey;
+    NSNumber *identifier = [_sessionOrSpeakerObject performSelector:@selector(identifier)];
+    if (identifier) {
+        NSString *storageKey = [NSString stringWithFormat:@"session_%ld", identifier.integerValue];
+        return storageKey;
+    }
+    return nil;
 }
 
 - (void)setupKeyboardAccessories {
