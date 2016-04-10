@@ -38,6 +38,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [_sessionDetailsTextView setContentOffset:CGPointZero animated:YES];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -58,10 +59,7 @@
                                    , _session.room.name];
         self.keywordsLabel.text = _session.keywordString;
         
-        [self.sessionDetailsTextView scrollRangeToVisible:NSMakeRange(0, 0)];
-        
-        [self setupGestures];
-        
+        [self setupGestures];        
         
         BOOL isFavorite = [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier];
         
