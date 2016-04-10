@@ -15,6 +15,7 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
+  - IHKeyboardAvoiding (2.5)
   - ISO8601DateFormatterValueTransformer (0.6.1):
     - RKValueTransformers (~> 1.1.0)
   - RestKit (0.26.0):
@@ -42,11 +43,13 @@ PODS:
 
 DEPENDENCIES:
   - BlocksKit
+  - IHKeyboardAvoiding
   - RestKit
 
 SPEC CHECKSUMS:
   AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
   ISO8601DateFormatterValueTransformer: 52da467d6ec899d6aedda8e48280ac92e8ee97e6
   RestKit: 112fba5bd1f97598aac0db7981863d5fdc0263a2
   RKValueTransformers: e5ed67e3811229b616fe01bddeeafe3bb337b1b9

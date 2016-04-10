@@ -4,5 +4,6 @@
 target 'PDC2016' do
     pod 'RestKit'
     pod 'BlocksKit'
+    pod 'IHKeyboardAvoiding'
 end
 
