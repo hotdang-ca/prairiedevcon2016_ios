@@ -32,7 +32,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="26e-mm-7DZ">
                     <rect key="frame" x="411" y="72" width="181" height="181"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="181" id="13d-rT-hGB"/>
+                        <constraint firstAttribute="width" priority="750" constant="181" id="13d-rT-hGB"/>
                         <constraint firstAttribute="height" constant="181" id="6CD-CQ-BjC"/>
                     </constraints>
                 </imageView>
@@ -72,6 +72,7 @@
                 <constraint firstItem="26e-mm-7DZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eSW-ia-vGc" secondAttribute="trailing" constant="8" id="D4E-AY-AXG"/>
                 <constraint firstItem="bcZ-11-qVz" firstAttribute="top" secondItem="HFt-Xa-XAC" secondAttribute="bottom" constant="8" id="DeN-QE-pm7"/>
                 <constraint firstItem="HFt-Xa-XAC" firstAttribute="top" secondItem="o0P-Tr-2f9" secondAttribute="bottom" constant="8" id="Glj-pG-6dp"/>
+                <constraint firstItem="26e-mm-7DZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="csD-bh-fuE" secondAttribute="trailing" constant="8" id="IQk-uu-Y2U"/>
                 <constraint firstItem="csD-bh-fuE" firstAttribute="baseline" secondItem="dye-el-vJs" secondAttribute="baseline" id="KaN-Qa-bfA"/>
                 <constraint firstItem="BhG-jZ-hsc" firstAttribute="top" secondItem="26e-mm-7DZ" secondAttribute="bottom" constant="8" id="N7y-4e-kBE"/>
                 <constraint firstItem="dye-el-vJs" firstAttribute="baseline" secondItem="bcZ-11-qVz" secondAttribute="baseline" id="Uqb-AI-ssq"/>
