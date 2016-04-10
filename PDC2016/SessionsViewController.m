@@ -34,6 +34,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithRed:(237.0/255.0) green:(237.0/255.0) blue:(237.0/255.0) alpha:1.0];
+    
+    self.sessionsCollectionView.backgroundColor = [UIColor clearColor];
+    
     _dataSource = [SessionsDataSource sharedDataSource];
     [_dataSource addObserver:self forKeyPath:@"sessions" options:0 context:NULL];
     
@@ -77,7 +81,7 @@
 #pragma mark - Collection View Data Source
 -(void)setupCollectionViewCell {
     collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
-    [collectionViewLayout setItemSize:CGSizeMake(self.view.frame.size.width-4, 200)];
+    [collectionViewLayout setItemSize:CGSizeMake(300, 215)];
     [collectionViewLayout setSectionInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     [collectionViewLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     collectionViewLayout.minimumLineSpacing = 8;
@@ -171,14 +175,25 @@
             iterator++;
         }
         
-        if (! CGRectIsNull(favoriteRect)) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [scrollView scrollRectToVisible:favoriteRect animated:YES];
-            });
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [scrollView scrollRectToVisible:CGRectIsNull(favoriteRect) ? CGRectZero : favoriteRect animated:YES];
+        });
+
+        
     }
     
-    [scrollView layoutIfNeeded];
+    if (scrollView.subviews.count > 1) {
+        containerCell.leftIndicator.hidden = NO;
+        containerCell.rightIndicator.hidden = NO;
+    } else {
+        containerCell.leftIndicator.hidden = YES;
+        containerCell.rightIndicator.hidden = YES;
+    }
+    
+    containerCell.contentView.layer.borderWidth = 2.0;
+    containerCell.contentView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    containerCell.contentView.layer.cornerRadius = 4.0;
     
     return containerCell;
 }

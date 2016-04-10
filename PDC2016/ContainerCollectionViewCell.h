@@ -11,5 +11,7 @@
 @interface ContainerCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIScrollView *containingScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *timeslotLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *rightIndicator;
 
 @end
