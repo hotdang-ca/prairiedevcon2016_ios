@@ -11,17 +11,28 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYz-67-70r">
-                    <rect key="frame" x="139" y="14" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="0.96752337340000005" blue="0.3230641273" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZT5-So-ZOa">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYz-67-70r">
+                            <rect key="frame" x="139" y="12" width="42" height="20"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.19671336210000001" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="SYz-67-70r" firstAttribute="centerY" secondItem="ZT5-So-ZOa" secondAttribute="centerY" id="skx-Zt-fQZ"/>
+                        <constraint firstItem="SYz-67-70r" firstAttribute="centerX" secondItem="ZT5-So-ZOa" secondAttribute="centerX" id="uvo-JV-KJG"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.0" blue="0.01026766514" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="SYz-67-70r" firstAttribute="centerX" secondItem="ETv-ol-Eot" secondAttribute="centerX" id="hCc-iQ-29k"/>
-                <constraint firstItem="SYz-67-70r" firstAttribute="centerY" secondItem="ETv-ol-Eot" secondAttribute="centerY" id="vD0-WC-Etv"/>
+                <constraint firstItem="ZT5-So-ZOa" firstAttribute="top" secondItem="ETv-ol-Eot" secondAttribute="top" id="1bm-CR-HSG"/>
+                <constraint firstAttribute="bottom" secondItem="ZT5-So-ZOa" secondAttribute="bottom" constant="8" id="S39-Wb-Qhu"/>
+                <constraint firstItem="ZT5-So-ZOa" firstAttribute="leading" secondItem="ETv-ol-Eot" secondAttribute="leading" id="ZJO-EZ-u4C"/>
+                <constraint firstAttribute="trailing" secondItem="ZT5-So-ZOa" secondAttribute="trailing" id="pwz-18-KNc"/>
             </constraints>
             <connections>
                 <outlet property="headerTitleLabel" destination="SYz-67-70r" id="p7R-F5-BTy"/>
