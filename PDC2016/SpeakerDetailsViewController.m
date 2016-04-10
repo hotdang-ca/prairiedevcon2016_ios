@@ -84,7 +84,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"Speaker: %@", self.speaker.name);
+    [_speakerBioTextView setContentOffset:CGPointZero animated:YES];
 }
 /*
 #pragma mark - Navigation
