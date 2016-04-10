@@ -22,6 +22,7 @@
 
 #define BUTTON_TAG_FAV 1
 #define BUTTON_TAG_EDIT 2
+#define SYSTEM_SPEAKER_ID @34
 
 @interface SessionDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
@@ -66,33 +67,56 @@
         
         [self setupGestures];        
         
-        BOOL isFavorite = [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier];
-        
-        UIImage *favImage = [UIImage imageNamed:isFavorite ? @"fav_bar" : @"no_fav_bar"];
-        UIImage *editImage = [UIImage imageNamed:@"edit"];
-        
-        UIBarButtonItem *favButton = [[UIBarButtonItem alloc] bk_initWithImage:favImage style:UIBarButtonItemStylePlain handler:^(id sender) {
-            [[PDCFavoritesRepository sharedRepository] toggleFavorited:_session.identifier];
-            [self changeFavoriteImage: [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier]];
-        }];
-        
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] bk_initWithImage:editImage style:UIBarButtonItemStylePlain handler:^(id sender) {
-            DetailNotesViewController *notesViewController = [[DetailNotesViewController alloc] initWithNibName:NSStringFromClass(DetailNotesViewController.class)  bundle:[NSBundle mainBundle]];
-            if (notesViewController) {
-                
-                notesViewController.sessionOrSpeakerObject = _session;
-                
-                [self.navigationController pushViewController:notesViewController animated:YES];
-            }
-        }];
-        
-        
-        editButton.tag = BUTTON_TAG_EDIT;
-        favButton.tag = BUTTON_TAG_FAV;
-        
-        self.navigationItem.rightBarButtonItems = @[editButton, favButton];
+        [self setupFavoriteButtonIfNeeded];
+        [self setupEditButtonIfNeeded];
     }
     
+}
+
+-(void)setupEditButtonIfNeeded {
+    if ([_session.speaker.identifier isEqualToNumber:SYSTEM_SPEAKER_ID]) {
+        return;
+    }
+    
+    UIImage *editImage = [UIImage imageNamed:@"edit"];
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] bk_initWithImage:editImage style:UIBarButtonItemStylePlain handler:^(id sender) {
+        DetailNotesViewController *notesViewController = [[DetailNotesViewController alloc] initWithNibName:NSStringFromClass(DetailNotesViewController.class)  bundle:[NSBundle mainBundle]];
+        if (notesViewController) {
+            
+            notesViewController.sessionOrSpeakerObject = _session;
+            
+            [self.navigationController pushViewController:notesViewController animated:YES];
+        }
+    }];
+    
+    editButton.tag = BUTTON_TAG_EDIT;
+    
+    NSMutableArray <UIBarButtonItem *> *rightBarItems = [self.navigationItem.rightBarButtonItems mutableCopy] ?: [[NSMutableArray alloc] init];
+    
+    [rightBarItems addObject:editButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithArray:rightBarItems];
+}
+-(void)setupFavoriteButtonIfNeeded {
+    if ([_session.speaker.identifier isEqualToNumber:SYSTEM_SPEAKER_ID]) {
+        return;
+    }
+    
+    BOOL isFavorite = [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier];
+    
+    UIImage *favImage = [UIImage imageNamed:isFavorite ? @"fav_bar" : @"no_fav_bar"];
+    
+    UIBarButtonItem *favButton = [[UIBarButtonItem alloc] bk_initWithImage:favImage style:UIBarButtonItemStylePlain handler:^(id sender) {
+        [[PDCFavoritesRepository sharedRepository] toggleFavorited:_session.identifier];
+        [self changeFavoriteImage: [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier]];
+    }];
+    favButton.tag = BUTTON_TAG_FAV;
+    
+    NSMutableArray <UIBarButtonItem *> *rightBarItems = [self.navigationItem.rightBarButtonItems mutableCopy] ?: [[NSMutableArray alloc] init];
+    
+    [rightBarItems addObject:favButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithArray:rightBarItems];
 }
 
 -(void)changeFavoriteImage:(BOOL)isFavorite {

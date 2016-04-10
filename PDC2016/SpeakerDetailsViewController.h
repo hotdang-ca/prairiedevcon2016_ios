@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 @class Speaker;
 
-@interface SpeakerDetailsViewController : UIViewController
+@interface SpeakerDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
 @property (strong, nonatomic) Speaker *speaker;
 
 @end

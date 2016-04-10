@@ -34,11 +34,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b_no_favorite" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-EE-RJj">
-                                <rect key="frame" x="248" y="151" width="44" height="44"/>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_fav_bar" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-EE-RJj">
+                                <rect key="frame" x="270" y="173" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="Isx-zl-OWE"/>
-                                    <constraint firstAttribute="height" constant="44" id="lyc-Bi-9MX"/>
+                                    <constraint firstAttribute="width" constant="22" id="Isx-zl-OWE"/>
+                                    <constraint firstAttribute="height" constant="22" id="lyc-Bi-9MX"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEM-X2-cl9">
@@ -98,6 +98,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="b_no_favorite" width="64" height="64"/>
+        <image name="no_fav_bar" width="22" height="22"/>
     </resources>
 </document>

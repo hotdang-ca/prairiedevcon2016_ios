@@ -11,6 +11,10 @@
 #define kApiProviderBaseURLString @"http://192.168.100.112:8000"
 #define kApiProviderTimeslotsListURLString @"/api/timeslots"
 #define kApiProviderSessionListURLString @"/api/sessions"
+#define kApiProviderSpeakerListURLString @"/api/speakers"
+#define kApiProviderSpeakerByIdURLString @"/api/speakers/%@"
+#define kApiProviderSpeakersByCompanyURLString @"/api/speakers/company/%@"
+
 
 @interface PDCApiProvider : NSObject
 +(instancetype)sharedApiProvider;

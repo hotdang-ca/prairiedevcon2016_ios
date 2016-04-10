@@ -100,6 +100,6 @@ CGFloat BORDER_WIDTH = 0.0;
     self.layer.cornerRadius = CORNER_RADIUS;
     self.layer.borderColor = UNSELECTED_BORDER_COLOR.CGColor;
     
-    self.favoriteImageView.image = [UIImage imageNamed:selected ? @"b_favorite" : @"b_no_favorite"];
+    self.favoriteImageView.image = [UIImage imageNamed:selected ? @"fav_bar" : @"no_fav_bar"];
 }
 @end
