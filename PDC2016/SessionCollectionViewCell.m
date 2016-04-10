@@ -16,10 +16,10 @@
 
 #import <UIGestureRecognizer+BlocksKit.h>
 
-CGFloat CORNER_RADIUS = 8.0;
-CGFloat BORDER_WIDTH = 2.0;
+CGFloat CORNER_RADIUS = 2.0;
+CGFloat BORDER_WIDTH = 0.0;
 #define SELECTED_BORDER_COLOR [UIColor yellowColor]
-#define UNSELECTED_BORDER_COLOR [UIColor blackColor]
+#define UNSELECTED_BORDER_COLOR [UIColor whiteColor]
 #define BACKGROUND_COLOR [UIColor colorWithRed:203/255 green:91/255 blue:94/255 alpha:1.0]
 
 @interface SessionCollectionViewCell()
@@ -76,7 +76,8 @@ CGFloat BORDER_WIDTH = 2.0;
         [self configureAsSelected:YES];
     }
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithRed:(237.0/255.0) green:(237.0/255.0) blue:(237.0/255.0) alpha:1.0];
+    
     [self configureActionsWithSession:session];
 }
 

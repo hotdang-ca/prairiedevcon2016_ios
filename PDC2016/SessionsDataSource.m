@@ -81,6 +81,8 @@
         
         if (indexOfThisSessionTimeslot != NSNotFound) {
             [mondayByTimeSlot[indexOfThisSessionTimeslot] addObject:session];
+        } else {
+            
         }
     }
     
@@ -97,6 +99,7 @@
                                         @"7:30 - 8:30",
                                         @"8:30 - 9:30",
                                         @"9:45 - 10:45",
+                                        @"10:45 - 11:00",
                                         @"11:00 - 12:00",
                                         @"12:00 - 1:00",
                                         @"1:00 - 2:00",

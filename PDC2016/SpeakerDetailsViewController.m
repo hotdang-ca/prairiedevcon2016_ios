@@ -7,6 +7,7 @@
 //
 
 #import "SpeakerDetailsViewController.h"
+#import "DetailNotesViewController.h"
 
 #import "Speaker.h"
 
@@ -75,6 +76,18 @@
         } else {
             _blogButton.enabled = NO;
         }
+        
+        
+        UIImage *editImage = [UIImage imageNamed:@"edit"];
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] bk_initWithImage:editImage style:UIBarButtonItemStylePlain handler:^(id sender) {
+            DetailNotesViewController *notesViewController = [[DetailNotesViewController alloc] initWithNibName:NSStringFromClass(DetailNotesViewController.class)  bundle:[NSBundle mainBundle]];
+            if (notesViewController) {
+                notesViewController.sessionOrSpeakerObject = _speaker;
+                [self.navigationController pushViewController:notesViewController animated:YES];
+            }
+        }];
+        
+        self.navigationItem.rightBarButtonItems = @[editButton];
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -84,7 +97,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"Speaker: %@", self.speaker.name);
+    [_speakerBioTextView setContentOffset:CGPointZero animated:YES];
 }
 /*
 #pragma mark - Navigation

@@ -14,9 +14,14 @@
 #import "Timeslot.h"
 
 #import "SpeakerDetailsViewController.h"
+#import "DetailNotesViewController.h"
+
 #import "PDCFavoritesRepository.h"
 
 #import <BlocksKit+UIKit.h>
+
+#define BUTTON_TAG_FAV 1
+#define BUTTON_TAG_EDIT 2
 
 @interface SessionDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
@@ -38,6 +43,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [_sessionDetailsTextView setContentOffset:CGPointZero animated:YES];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -58,24 +64,45 @@
                                    , _session.room.name];
         self.keywordsLabel.text = _session.keywordString;
         
-        [self.sessionDetailsTextView scrollRangeToVisible:NSMakeRange(0, 0)];
-        
-        [self setupGestures];
-        
+        [self setupGestures];        
         
         BOOL isFavorite = [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier];
         
-        UIImage *image = [UIImage imageNamed:isFavorite ? @"fav_bar" : @"no_fav_bar"];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:image style:UIBarButtonItemStylePlain handler:^(id sender) {
+        UIImage *favImage = [UIImage imageNamed:isFavorite ? @"fav_bar" : @"no_fav_bar"];
+        UIImage *editImage = [UIImage imageNamed:@"edit"];
+        
+        UIBarButtonItem *favButton = [[UIBarButtonItem alloc] bk_initWithImage:favImage style:UIBarButtonItemStylePlain handler:^(id sender) {
             [[PDCFavoritesRepository sharedRepository] toggleFavorited:_session.identifier];
             [self changeFavoriteImage: [[PDCFavoritesRepository sharedRepository] isFavorite:_session.identifier]];
         }];
+        
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] bk_initWithImage:editImage style:UIBarButtonItemStylePlain handler:^(id sender) {
+            DetailNotesViewController *notesViewController = [[DetailNotesViewController alloc] initWithNibName:NSStringFromClass(DetailNotesViewController.class)  bundle:[NSBundle mainBundle]];
+            if (notesViewController) {
+                
+                notesViewController.sessionOrSpeakerObject = _session;
+                
+                [self.navigationController pushViewController:notesViewController animated:YES];
+            }
+        }];
+        
+        
+        editButton.tag = BUTTON_TAG_EDIT;
+        favButton.tag = BUTTON_TAG_FAV;
+        
+        self.navigationItem.rightBarButtonItems = @[editButton, favButton];
     }
     
 }
 
 -(void)changeFavoriteImage:(BOOL)isFavorite {
-    UIBarButtonItem *favButton = self.navigationItem.rightBarButtonItem;
+    
+    id passingTestBlock = ^BOOL(UIBarButtonItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+        return item.tag == BUTTON_TAG_FAV;
+    };
+    
+    UIBarButtonItem *favButton = [self.navigationItem.rightBarButtonItems objectAtIndex:[self.navigationItem.rightBarButtonItems indexOfObjectWithOptions:NSEnumerationConcurrent passingTest:passingTestBlock]];
+    
     if (favButton) {
         [favButton setImage:[UIImage imageNamed:isFavorite ? @"fav_bar" : @"no_fav_bar"]];
     }

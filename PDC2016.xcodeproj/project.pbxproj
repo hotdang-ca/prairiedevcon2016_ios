@@ -31,6 +31,8 @@
 		FE48A8D21CB9915200FF3229 /* SessionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE48A8D01CB9915200FF3229 /* SessionDetailsViewController.xib */; };
 		FE48A8D61CB995F000FF3229 /* SpeakerDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48A8D41CB995F000FF3229 /* SpeakerDetailsViewController.m */; };
 		FE48A8D71CB995F000FF3229 /* SpeakerDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE48A8D51CB995F000FF3229 /* SpeakerDetailsViewController.xib */; };
+		FE48A8DD1CBAD53B00FF3229 /* DetailNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48A8DB1CBAD53B00FF3229 /* DetailNotesViewController.m */; };
+		FE48A8DE1CBAD53B00FF3229 /* DetailNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE48A8DC1CBAD53B00FF3229 /* DetailNotesViewController.xib */; };
 		FE872BB41CB95BF000DCD478 /* SessionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE872BB31CB95BF000DCD478 /* SessionHeaderCell.xib */; };
 		FE872BB71CB95C3100DCD478 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE872BB61CB95C3100DCD478 /* HeaderCell.m */; };
 		FE872BBD1CB9634600DCD478 /* ContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE872BBB1CB9634600DCD478 /* ContainerCollectionViewCell.m */; };
@@ -81,6 +83,9 @@
 		FE48A8D31CB995F000FF3229 /* SpeakerDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerDetailsViewController.h; sourceTree = "<group>"; };
 		FE48A8D41CB995F000FF3229 /* SpeakerDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakerDetailsViewController.m; sourceTree = "<group>"; };
 		FE48A8D51CB995F000FF3229 /* SpeakerDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeakerDetailsViewController.xib; sourceTree = "<group>"; };
+		FE48A8DA1CBAD53B00FF3229 /* DetailNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNotesViewController.h; sourceTree = "<group>"; };
+		FE48A8DB1CBAD53B00FF3229 /* DetailNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNotesViewController.m; sourceTree = "<group>"; };
+		FE48A8DC1CBAD53B00FF3229 /* DetailNotesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailNotesViewController.xib; sourceTree = "<group>"; };
 		FE872BB31CB95BF000DCD478 /* SessionHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionHeaderCell.xib; sourceTree = "<group>"; };
 		FE872BB51CB95C3100DCD478 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
 		FE872BB61CB95C3100DCD478 /* HeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
@@ -228,6 +233,8 @@
 				FE48A8CF1CB9915200FF3229 /* SessionDetailsViewController.m */,
 				FE48A8D31CB995F000FF3229 /* SpeakerDetailsViewController.h */,
 				FE48A8D41CB995F000FF3229 /* SpeakerDetailsViewController.m */,
+				FE48A8DA1CBAD53B00FF3229 /* DetailNotesViewController.h */,
+				FE48A8DB1CBAD53B00FF3229 /* DetailNotesViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -243,6 +250,7 @@
 		FE48A8D81CB9962900FF3229 /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
+				FE48A8DC1CBAD53B00FF3229 /* DetailNotesViewController.xib */,
 				FE48A8D01CB9915200FF3229 /* SessionDetailsViewController.xib */,
 				FE48A8D51CB995F000FF3229 /* SpeakerDetailsViewController.xib */,
 			);
@@ -328,6 +336,7 @@
 				CB025CB11CAE02DE007BF6A9 /* SessionCollectionViewCell.xib in Resources */,
 				FE872BB41CB95BF000DCD478 /* SessionHeaderCell.xib in Resources */,
 				CB49DD5D1CAD94F40062F9D2 /* TimeSlotCollectionViewCell.xib in Resources */,
+				FE48A8DE1CBAD53B00FF3229 /* DetailNotesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +389,7 @@
 				CB49DD4E1CAD7E750062F9D2 /* TimeslotsViewController.m in Sources */,
 				CB49DD581CAD80B40062F9D2 /* Timeslot.m in Sources */,
 				CB49DD371CAD77D00062F9D2 /* AppDelegate.m in Sources */,
+				FE48A8DD1CBAD53B00FF3229 /* DetailNotesViewController.m in Sources */,
 				CB49DD341CAD77D00062F9D2 /* main.m in Sources */,
 				CB49DD661CADA92E0062F9D2 /* Session.m in Sources */,
 				CB49DD601CADA38D0062F9D2 /* Room.m in Sources */,
