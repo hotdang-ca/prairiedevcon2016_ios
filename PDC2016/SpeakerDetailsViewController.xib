@@ -9,6 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpeakerDetailsViewController">
             <connections>
                 <outlet property="blogButton" destination="csD-bh-fuE" id="jus-m2-ko4"/>
+                <outlet property="sessionsTableView" destination="k6t-df-eS2" id="pNW-Pw-v7m"/>
                 <outlet property="speakerBioTextView" destination="BhG-jZ-hsc" id="ZSu-KQ-U8s"/>
                 <outlet property="speakerCityAndRegionLabel" destination="HFt-Xa-XAC" id="SWK-rA-CF3"/>
                 <outlet property="speakerCompanyLabel" destination="o0P-Tr-2f9" id="xFW-BD-fps"/>
@@ -106,20 +107,34 @@
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem Ipsum" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BhG-jZ-hsc">
-                    <rect key="frame" x="8" y="344" width="584" height="200"/>
+                    <rect key="frame" x="8" y="344" width="584" height="80"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="DsB-nf-mz9"/>
+                    </constraints>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k6t-df-eS2">
+                    <rect key="frame" x="0.0" y="424" width="600" height="125"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="YyG-zG-JdD"/>
+                        <outlet property="delegate" destination="-1" id="uT2-wt-4Y3"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="26e-mm-7DZ" secondAttribute="trailing" id="2s4-Wb-ziS"/>
                 <constraint firstItem="BhG-jZ-hsc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="5Yl-vx-kdI"/>
-                <constraint firstAttribute="bottom" secondItem="BhG-jZ-hsc" secondAttribute="bottom" constant="56" id="Aa7-gY-qMR"/>
+                <constraint firstAttribute="trailing" secondItem="k6t-df-eS2" secondAttribute="trailing" id="8Ma-lg-wPI"/>
                 <constraint firstItem="BhG-jZ-hsc" firstAttribute="top" secondItem="26e-mm-7DZ" secondAttribute="bottom" constant="8" id="Bbe-Jk-rjL"/>
+                <constraint firstItem="k6t-df-eS2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CUw-QV-vpd"/>
                 <constraint firstItem="T0D-MP-TFn" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="GCc-Br-rSw"/>
+                <constraint firstItem="k6t-df-eS2" firstAttribute="top" secondItem="BhG-jZ-hsc" secondAttribute="bottom" id="PjA-3k-xMb"/>
+                <constraint firstAttribute="bottom" secondItem="k6t-df-eS2" secondAttribute="bottom" constant="51" id="SSh-OA-Jhs"/>
                 <constraint firstItem="26e-mm-7DZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="56" id="TVA-C5-iWC"/>
                 <constraint firstItem="BhG-jZ-hsc" firstAttribute="top" secondItem="T0D-MP-TFn" secondAttribute="bottom" constant="8" id="av5-x4-PJQ"/>
                 <constraint firstAttribute="trailing" secondItem="T0D-MP-TFn" secondAttribute="trailing" id="avy-eY-mxN"/>

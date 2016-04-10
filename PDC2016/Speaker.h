@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *blogUrlString;
 @property (strong, nonatomic) NSString *webUrlString;
 @property (strong, nonatomic) NSString *twitterName;
+@property (strong, nonatomic) NSSet *sessions;
 
 +(RKObjectMapping *)defaultMapping;
 @end
