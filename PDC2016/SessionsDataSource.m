@@ -56,9 +56,9 @@
     NSMutableArray *tuesdayEvents = [NSMutableArray array];
     
     for (Session *session in array) {
-        if ([session.timeslot.day isEqualToString:@"Monday"]) {
+        if ([session.timeslot.dayString isEqualToString:@"Monday"]) {
             [mondayEvents addObject:session];
-        } else if ([session.timeslot.day isEqualToString:@"Tuesday"]) {
+        } else if ([session.timeslot.dayString isEqualToString:@"Tuesday"]) {
             [tuesdayEvents addObject:session];
         }
     }

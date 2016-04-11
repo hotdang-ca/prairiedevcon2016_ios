@@ -66,7 +66,7 @@ CGFloat BORDER_WIDTH = 0.0;
     _sessionSpeakerCompany.text = session.speaker.companyName.length > 2 ? [NSString stringWithFormat:@"(%@)", session.speaker.companyName] : @"";
     
     _sessionTimeslotDayAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@"
-                                            , session.timeslot.day
+                                            , session.timeslot.dayString
                                             , session.timeslot.timeRange];
     _sessionRoomNameLabel.text = session.room.name;
     // should be selected
