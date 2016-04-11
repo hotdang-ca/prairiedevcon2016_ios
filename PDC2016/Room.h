@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Restkit/Restkit.h>
-@interface Room : NSObject
+@interface Room : NSObject <NSCoding, NSCopying>
 
 @property(strong,nonatomic) NSNumber *identifier;
 @property(strong,nonatomic) NSString *name;
