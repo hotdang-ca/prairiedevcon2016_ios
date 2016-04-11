@@ -42,7 +42,7 @@
     [_dataSource addObserver:self forKeyPath:@"sessions" options:0 context:NULL];
     
     [self setupCollectionViewCell];
-    [_dataSource reloadSessions];
+    [_dataSource reloadSessions:NO];
     
     if (self.navigationController) {
         UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadList:)];
@@ -53,7 +53,7 @@
 }
 
 - (void)reloadList:(id)sender {
-    [_dataSource reloadSessions];
+    [_dataSource reloadSessions:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
