@@ -11,6 +11,7 @@
 #import "Speaker.h"
 
 #import <IHKeyboardAvoiding.h>
+#import <BlocksKit+UIKit.h>
 
 @interface DetailNotesViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *notesTextView;
@@ -21,15 +22,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Notes";
+    self.title = self.storageKeyPrefix ?: @"Notes";
     [self loadText];
     [self setupKeyboardAccessories];
     [_notesTextView becomeFirstResponder];
+    [self setupToolbar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"Save!!");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +38,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)setupToolbar {
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] bk_initWithBarButtonSystemItem:UIBarButtonSystemItemAction handler:^(id sender) {
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[_notesTextView.text] applicationActivities:nil];
+        activityViewController.popoverPresentationController.sourceView =
+        self.view;
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    }];
+    
+    NSMutableArray <UIBarButtonItem *> *rightBarItems = [self.navigationItem.rightBarButtonItems mutableCopy] ?: [[NSMutableArray alloc] init];
+    
+    [rightBarItems addObject:shareButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithArray:rightBarItems];
+}
 #pragma mark - TextView Delegates
 -(void)doneKeyboardButtonPressed {
     [_notesTextView resignFirstResponder];
@@ -84,10 +99,11 @@
 -(NSString *)storageKey {
     NSNumber *identifier = [_sessionOrSpeakerObject performSelector:@selector(identifier)];
     if (identifier) {
-        NSString *storageKey = [NSString stringWithFormat:@"session_%ld", identifier.integerValue];
+        NSString *storageKey = [NSString stringWithFormat:@"%@_%ld", _storageKeyPrefix ?: @"session", identifier.integerValue];
         return storageKey;
     }
     return nil;
+    
 }
 
 - (void)setupKeyboardAccessories {

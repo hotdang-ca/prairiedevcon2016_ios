@@ -69,10 +69,37 @@
         
         [self setupFavoriteButtonIfNeeded];
         [self setupEditButtonIfNeeded];
+        [self setupEvaluationButtonIfNeeded];
     }
     
 }
 
+-(void)setupEvaluationButtonIfNeeded {
+    if ([_session.speaker.identifier isEqualToNumber:SYSTEM_SPEAKER_ID]) {
+        return;
+    }
+    
+    UIImage *evalImage = [UIImage imageNamed:@"eval"];
+    UIBarButtonItem *evalButton = [[UIBarButtonItem alloc] bk_initWithImage:evalImage style:UIBarButtonItemStylePlain handler:^(id sender) {
+        DetailNotesViewController *notesViewController = [[DetailNotesViewController alloc] initWithNibName:NSStringFromClass(DetailNotesViewController.class)  bundle:[NSBundle mainBundle]];
+        notesViewController.storageKeyPrefix = @"eval";
+        
+        if (notesViewController) {
+            
+            notesViewController.sessionOrSpeakerObject = _session;
+            
+            [self.navigationController pushViewController:notesViewController animated:YES];
+        }
+    }];
+    
+    evalButton.tag = BUTTON_TAG_EDIT;
+    
+    NSMutableArray <UIBarButtonItem *> *rightBarItems = [self.navigationItem.rightBarButtonItems mutableCopy] ?: [[NSMutableArray alloc] init];
+    
+    [rightBarItems addObject:evalButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithArray:rightBarItems];
+}
 -(void)setupEditButtonIfNeeded {
     if ([_session.speaker.identifier isEqualToNumber:SYSTEM_SPEAKER_ID]) {
         return;

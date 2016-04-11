@@ -10,4 +10,5 @@
 
 @interface DetailNotesViewController : UIViewController
 @property (strong, nonatomic) id sessionOrSpeakerObject;
+@property (strong, nonatomic) NSString *storageKeyPrefix;
 @end
