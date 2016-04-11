@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <Restkit/Restkit.h>
 
-@interface Speaker : NSObject
+@interface Speaker : NSObject <NSCoding,NSCopying>
+
 @property (strong, nonatomic) NSNumber *identifier;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *companyName;

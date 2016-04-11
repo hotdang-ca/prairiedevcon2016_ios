@@ -33,7 +33,7 @@
 }
 
 -(void)configureWithTimeSlot:(Timeslot *)timeslot {
-    self.dayLabel.text = timeslot.day;
+    self.dayLabel.text = timeslot.dayString;
     self.timeRangeLabel.text = timeslot.timeRange;
     self.roomLabel.text = timeslot.room.name;
     self.speakerNameLabel.text = timeslot.speaker.name;

@@ -12,7 +12,8 @@
 @class Room;
 @class Timeslot;
 
-@interface Session : NSObject
+@interface Session : NSObject <NSCopying,NSCoding>
+
 @property (strong, nonatomic) NSNumber *identifier;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *keywordString;

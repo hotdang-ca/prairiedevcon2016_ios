@@ -12,7 +12,7 @@
 @interface SessionsDataSource : NSObject
 +(instancetype)sharedDataSource;
 
--(void)reloadSessions;
+-(void)reloadSessions:(BOOL)forceInternet;
 
 @property (strong, nonatomic) NSArray *sessions;
 @property (strong, nonatomic) NSArray *sortedSessionsByTimeslot;

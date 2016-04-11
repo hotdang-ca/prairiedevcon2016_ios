@@ -16,6 +16,7 @@
 #import "Timeslot.h"
 
 @implementation SessionsDataSource
+NSString *jsonFile = @"sessions.json.dat";
 
 +(instancetype)sharedDataSource {
     static SessionsDataSource *datasource = nil;
@@ -34,12 +35,72 @@
     return self;
 }
 
--(void)reloadSessions {
+-(void)persistToDisk {
+
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_sessions];
+    [data writeToFile:[self.class jsonPath] atomically:YES];
+    /*
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_sessions
+                                                       options:kNilOptions
+                                                         error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
+    if (!error) {
+        [jsonString writeToFile:[self.class jsonPath] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    }
+     */
+}
+
+-(void)retrieveFromDisk {
+    NSData *data = [NSData dataWithContentsOfFile:[self.class jsonPath]];
+    NSArray *jsonArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    if (jsonArray) {
+        [self willChangeValueForKey:@"sessions"];
+        _sessions = jsonArray;
+        _sortedSessionsByTimeslot = [self sortSessionsWithArray:_sessions];
+        [self didChangeValueForKey:@"sessions"];
+    }
+    /*
+    NSError *error;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[self.class jsonPath]] options:kNilOptions error:&error];
+    if (!error) {
+        [self willChangeValueForKey:@"sessions"];
+        _sessions = jsonArray;
+        [self didChangeValueForKey:@"sessions"];
+    }
+     */
+}
+
++(BOOL)isCacheAvailable {
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self.class jsonPath]];
+}
+
++(NSString *)jsonPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachesDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [cachesDirectory stringByAppendingPathComponent:jsonFile];
+    NSLog(@"PATH: %@", filePath);
+    
+    return filePath;
+}
+
+-(void)reloadSessions:(BOOL)forceInternet {
+    if (![self.class isCacheAvailable] || forceInternet) {
+        [self getFromNetwork];
+    } else {
+        [self retrieveFromDisk];
+    }
+    
+}
+
+-(void)getFromNetwork {
     [[RKObjectManager sharedManager] getObjectsAtPath:kApiProviderSessionListURLString parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        
         [self willChangeValueForKey:@"sessions"];
         _sessions = mappingResult.array;
-        
+        [self persistToDisk];
         _sortedSessionsByTimeslot = [self sortSessionsWithArray:_sessions];
         
         [self didChangeValueForKey:@"sessions"];
@@ -56,9 +117,9 @@
     NSMutableArray *tuesdayEvents = [NSMutableArray array];
     
     for (Session *session in array) {
-        if ([session.timeslot.day isEqualToString:@"Monday"]) {
+        if ([session.timeslot.dayString isEqualToString:@"Monday"]) {
             [mondayEvents addObject:session];
-        } else if ([session.timeslot.day isEqualToString:@"Tuesday"]) {
+        } else if ([session.timeslot.dayString isEqualToString:@"Tuesday"]) {
             [tuesdayEvents addObject:session];
         }
     }

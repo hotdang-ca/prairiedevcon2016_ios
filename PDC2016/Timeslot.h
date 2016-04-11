@@ -13,9 +13,10 @@
 @class Speaker;
 @class Session;
 
-@interface Timeslot : NSObject
+@interface Timeslot : NSObject <NSCopying, NSCoding>
+
 @property (strong, nonatomic) NSNumber *identifier;
-@property (strong, nonatomic) NSString *day;
+@property (strong, nonatomic) NSString *dayString;
 @property (strong, nonatomic) NSString *timeRange;
 @property (strong, nonatomic) Room *room;
 @property (strong, nonatomic) Speaker *speaker;
