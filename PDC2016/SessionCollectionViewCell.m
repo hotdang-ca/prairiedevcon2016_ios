@@ -58,27 +58,22 @@ CGFloat BORDER_WIDTH = 0.0;
 }
 
 -(void)configureWithSession:(Session *)session {
+
     _sessionTitleLabel.text = session.title;
-    _sessionKeywordsLabel.text = session.keywordString; // don't need the individual keywords... yet...
-    _sessionDescriptionLabel.text = session.sessionDescription;
     _sessionSpeakerNameLabel.text = session.speaker.name;
-    
     _sessionSpeakerCompany.text = session.speaker.companyName.length > 2 ? [NSString stringWithFormat:@"(%@)", session.speaker.companyName] : @"";
-    
-    _sessionTimeslotDayAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@"
-                                            , session.timeslot.dayString
-                                            , session.timeslot.timeRange];
     _sessionRoomNameLabel.text = session.room.name;
+    
     // should be selected
     NSArray *favorites = [PDCFavoritesRepository sharedRepository].listOfFavorites;
-    
     if ([favorites indexOfObject:session.identifier] != NSNotFound) {
         [self configureAsSelected:YES];
     }
     
-    self.view.backgroundColor = [UIColor colorWithRed:(237.0/255.0) green:(237.0/255.0) blue:(237.0/255.0) alpha:1.0];
     
+    self.view.backgroundColor = [UIColor colorWithRed:(237.0/255.0) green:(237.0/255.0) blue:(237.0/255.0) alpha:1.0];
     [self configureActionsWithSession:session];
+     
 }
 
 -(void)configureActionsWithSession:(Session *)session {
