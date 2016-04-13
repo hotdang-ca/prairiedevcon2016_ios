@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *speakerCityAndRegionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speakerBioLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *speakerImageView;
-
+@property (weak, nonatomic) IBOutlet UILabel *tableLabel;
 @property (weak, nonatomic) IBOutlet UIButton *webButton;
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 @property (weak, nonatomic) IBOutlet UIButton *blogButton;
@@ -154,7 +154,14 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _sessions.count;
+    NSInteger numberOfRows = _sessions.count;
+    if (numberOfRows > 0) {
+        _tableLabel.text = [NSString stringWithFormat:@"Other Sessions by %@:", _speaker.name];
+    } else {
+        _tableLabel.text = @"";
+    }
+    
+    return numberOfRows;
 }
 
 #pragma mark - TableViewDelegate
@@ -162,6 +169,8 @@
     SessionTableViewCell *cell = [_sessionsTableView dequeueReusableCellWithIdentifier:@"SpeakerSessionCell" forIndexPath:indexPath];
     
     Session *session = [_sessions objectAtIndex:indexPath.row];
+    session.speaker = _speaker;
+    
     
     if (cell && session) {
         [cell configureWithSession:session];
