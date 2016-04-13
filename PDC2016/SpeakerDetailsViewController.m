@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *speakerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speakerCompanyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speakerCityAndRegionLabel;
-@property (weak, nonatomic) IBOutlet UITextView *speakerBioTextView;
+@property (weak, nonatomic) IBOutlet UILabel *speakerBioLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *speakerImageView;
 
 @property (weak, nonatomic) IBOutlet UIButton *webButton;
@@ -58,7 +58,6 @@
     [[SpeakersDataSource sharedDataSource] addObserver:self forKeyPath:@"speakers" options:0 context:NULL];
     [[SpeakersDataSource sharedDataSource] reloadSpeakers];
     
-    [_speakerBioTextView setContentOffset:CGPointZero animated:YES];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -87,9 +86,7 @@
         self.speakerNameLabel.text = _speaker.name;
         self.speakerCompanyLabel.text = _speaker.companyName;
         self.speakerCityAndRegionLabel.text = [NSString stringWithFormat:@"%@, %@", _speaker.city, _speaker.region];
-        self.speakerBioTextView.text = _speaker.bio;
-        
-        [self.speakerBioTextView scrollRangeToVisible:NSMakeRange(0, 0)];
+        self.speakerBioLabel.text = _speaker.bio;
         
         [self.speakerImageView setImageWithURL:[NSURL URLWithString:_speaker.imageUrlString]placeholderImage:[UIImage imageNamed:@"PrDCLogo"]];
         
