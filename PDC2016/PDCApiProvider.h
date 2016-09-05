@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kApiProviderBaseURLString @"http://192.168.100.112:8000"
+#define kApiProviderBaseURLString @"http://pdc.hotdang.ca"
 #define kApiProviderTimeslotsListURLString @"/api/timeslots"
 #define kApiProviderSessionListURLString @"/api/sessions"
 #define kApiProviderSpeakerListURLString @"/api/speakers"
